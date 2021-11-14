@@ -1,4 +1,12 @@
-import React from 'react'
+import React from 'react';
+import {
+    BrowserRouter,
+    Routes,
+    Route,
+    NavLink,
+    Outlet,
+    Navigate
+} from "react-router-dom";
 
 const Categories = () => {
     return (
@@ -9,14 +17,14 @@ const Categories = () => {
                     <span className="ml-6 font-semibold">Danh mục</span></h2>
                 <ul>
                     <li>
-                        <a href="./category.html" className="block text-sm font-semibold px-8 py-3 border-b border-l border-r border-gray-300 hover:bg-blue-300 hover:text-white">MACBOOK</a>
-                        <a href="./category.html" className="block text-sm font-semibold px-8 py-3 border-b border-l border-r border-gray-300 hover:bg-blue-300 hover:text-white">LAPTOP ACER</a>
-                        <a href="./category.html" className="block text-sm font-semibold px-8 py-3 border-b border-l border-r border-gray-300 hover:bg-blue-300 hover:text-white">LAPTOP DELL</a>
-                        <a href="./category.html" className="block text-sm font-semibold px-8 py-3 border-b border-l border-r border-gray-300 hover:bg-blue-300 hover:text-white">LAPTOP ASUS</a>
-                        <a href="./category.html" className="block text-sm font-semibold px-8 py-3 border-b border-l border-r border-gray-300 hover:bg-blue-300 hover:text-white">LAPTOP MSI</a>
-                        <a href="./category.html" className="block text-sm font-semibold px-8 py-3 border-b border-l border-r border-gray-300 hover:bg-blue-300 hover:text-white">LAPTOP LENOVO</a>
-                        <a href="./category.html" className="block text-sm font-semibold px-8 py-3 border-b border-l border-r border-gray-300 hover:bg-blue-300 hover:text-white">LAPTOP HP</a>
-                        <a href="./category.html" className="block text-sm font-semibold px-8 py-3 border-b border-l border-r border-gray-300 hover:bg-blue-300 hover:text-white">EVOO GAMING</a>
+                        <NavLink to="/category" className="block text-sm font-semibold px-8 py-3 border-b border-l border-r border-gray-300 hover:bg-blue-300 hover:text-white">MACBOOK</NavLink>
+                        <NavLink to="/category" className="block text-sm font-semibold px-8 py-3 border-b border-l border-r border-gray-300 hover:bg-blue-300 hover:text-white">LAPTOP ACER</NavLink>
+                        <NavLink to="/category" className="block text-sm font-semibold px-8 py-3 border-b border-l border-r border-gray-300 hover:bg-blue-300 hover:text-white">LAPTOP DELL</NavLink>
+                        <NavLink to="/category" className="block text-sm font-semibold px-8 py-3 border-b border-l border-r border-gray-300 hover:bg-blue-300 hover:text-white">LAPTOP ASUS</NavLink>
+                        <NavLink to="/category" className="block text-sm font-semibold px-8 py-3 border-b border-l border-r border-gray-300 hover:bg-blue-300 hover:text-white">LAPTOP MSI</NavLink>
+                        <NavLink to="/category" className="block text-sm font-semibold px-8 py-3 border-b border-l border-r border-gray-300 hover:bg-blue-300 hover:text-white">LAPTOP LENOVO</NavLink>
+                        <NavLink to="/category" className="block text-sm font-semibold px-8 py-3 border-b border-l border-r border-gray-300 hover:bg-blue-300 hover:text-white">LAPTOP HP</NavLink>
+                        <NavLink to="/category" className="block text-sm font-semibold px-8 py-3 border-b border-l border-r border-gray-300 hover:bg-blue-300 hover:text-white">EVOO GAMING</NavLink>
                     </li>
                 </ul>
             </div>

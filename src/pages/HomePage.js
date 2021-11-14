@@ -9,7 +9,7 @@ import ProductItem from '../components/client/ProductItem';
 export default function HomePage() {
     return (
         <>
-            <Header></Header>
+            {/* <Header></Header> */}
             <Banner></Banner>
             <div className="content bg-gray-100 pb-8" id="content">
                 <div className=" mx-auto grid grid-cols-4 gap-8 pt-5" style={{ width: '1200px' }}>
@@ -55,7 +55,7 @@ export default function HomePage() {
                     </div>
                 </div>
             </div>
-            <Footer></Footer>
+            {/* <Footer></Footer> */}
         </>
     );
 }

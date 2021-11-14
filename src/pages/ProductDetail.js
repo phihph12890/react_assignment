@@ -146,7 +146,7 @@ const ProductDetail = () => {
                                     <a className="hover:text-yellow-600" href="/#/product"><h4 className="text-sm px-2 pt-1 group-hover:text-yellow-600">Laptop Acer Gaming Nitro 5 AN515-45-R3SM (NH.QBMSV.005)</h4></a>
                                     <p className="text-red-500 text-lg font-bold pt-1  italic">21.000.000 VND<span className="text-gray-500 text-sm ml-2 font-bold pt-1  italic line-through">20.000.000 VND</span></p>
                                     <div className="transition duration-300 ease-in-out pt-2 transform translate-y-24 group-hover:-translate-y-0">
-                                        <button className="bg-blue-500 text-white bg-black text-base rounded-md font-bold btn_addCart" data-id="${relateProduct._id}" style={{ padding: '6px 70px' }}>THÊM GIỎ HÀNG</button>
+                                        <button className="bg-blue-500 text-white bg-black text-base rounded-md font-bold btn_addCart" data-id="" style={{ padding: '6px 70px' }}>THÊM GIỎ HÀNG</button>
                                     </div>
                                 </div>
                                 <hr className />
@@ -159,7 +159,7 @@ const ProductDetail = () => {
                                     <a className="hover:text-yellow-600" href="/#/product"><h4 className="text-sm px-2 pt-1 group-hover:text-yellow-600">Laptop Acer Gaming Nitro 5 AN515-45-R3SM (NH.QBMSV.005)</h4></a>
                                     <p className="text-red-500 text-lg font-bold pt-1  italic">21.000.000 VND<span className="text-gray-500 text-sm ml-2 font-bold pt-1  italic line-through">20.000.000 VND</span></p>
                                     <div className="transition duration-300 ease-in-out pt-2 transform translate-y-24 group-hover:-translate-y-0">
-                                        <button className="bg-blue-500 text-white bg-black text-base rounded-md font-bold btn_addCart" data-id="${relateProduct._id}" style={{ padding: '6px 70px' }}>THÊM GIỎ HÀNG</button>
+                                        <button className="bg-blue-500 text-white bg-black text-base rounded-md font-bold btn_addCart" data-id="" style={{ padding: '6px 70px' }}>THÊM GIỎ HÀNG</button>
                                     </div>
                                 </div>
                                 <hr className />
@@ -172,7 +172,7 @@ const ProductDetail = () => {
                                     <a className="hover:text-yellow-600" href="/#/product"><h4 className="text-sm px-2 pt-1 group-hover:text-yellow-600">Laptop Acer Gaming Nitro 5 AN515-45-R3SM (NH.QBMSV.005)</h4></a>
                                     <p className="text-red-500 text-lg font-bold pt-1  italic">21.000.000 VND<span className="text-gray-500 text-sm ml-2 font-bold pt-1  italic line-through">20.000.000 VND</span></p>
                                     <div className="transition duration-300 ease-in-out pt-2 transform translate-y-24 group-hover:-translate-y-0">
-                                        <button className="bg-blue-500 text-white bg-black text-base rounded-md font-bold btn_addCart" data-id="${relateProduct._id}" style={{ padding: '6px 70px' }}>THÊM GIỎ HÀNG</button>
+                                        <button className="bg-blue-500 text-white bg-black text-base rounded-md font-bold btn_addCart" data-id="" style={{ padding: '6px 70px' }}>THÊM GIỎ HÀNG</button>
                                     </div>
                                 </div>
                                 <hr className />

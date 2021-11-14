@@ -1,5 +1,13 @@
 import React from 'react';
 import Marquee from "react-fast-marquee";
+import {
+    BrowserRouter,
+    Routes,
+    Route,
+    NavLink,
+    Outlet,
+    Navigate
+} from "react-router-dom";
 
 const Header = () => {
     return (
@@ -7,7 +15,7 @@ const Header = () => {
             <div className="header">
                 <div className=" container mx-auto flex py-1 justify-between items-center " style={{ maxWidth: '1200px' }}>
                     <div className>
-                        <a href="/"><img className="h-24 w-40" src="https://laptopaz.vn/media/banner/logo_laptopaz%20(2).jpg" alt="" /></a>
+                        <NavLink to="/"><img className="h-24 w-40" src="https://laptopaz.vn/media/banner/logo_laptopaz%20(2).jpg" alt="" /></NavLink>
                     </div>
                     <div className>
                         <form>
@@ -20,8 +28,8 @@ const Header = () => {
                         <p className="text-sm ">09865.02468 - 08586.02468</p>
                         <p className="text-sm">Địa chỉ: Số 18, ngõ 121, Thái Hà, Đống Đa, Hà Nội</p>
                         <div className="bg-blue-500 rounded-md text-white mt-1">
-                            <a className="mr-8 " href="/#/about">Giới thiệu</a>
-                            <a className href="/#/contact">Liên hệ</a>
+                            <NavLink className="mr-8 " to="/about">Giới thiệu</NavLink>
+                            <NavLink className to="/contact">Liên hệ</NavLink>
                         </div>
                     </div>
                     <div className="items-center">

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Header from '../components/client/Header';
-import Banner from '../components/client/Banner';
+// import Banner from '../components/client/Banner';
 import Footer from '../components/client/Footer';
 import Categories from '../components/client/Categories';
 import ProductItem from '../components/client/ProductItem';
@@ -9,7 +9,7 @@ import ProductItem from '../components/client/ProductItem';
 export default function HomePage() {
     return (
         <>
-            <Header></Header>
+            {/* <Header></Header> */}
             <div className="content bg-gray-100 pb-8" id="content">
                 <div className=" mx-auto grid grid-cols-4 gap-8 pt-5" style={{ width: '1200px' }}>
                     <aside className="col-span-1 bg-gray-100">
@@ -36,7 +36,7 @@ export default function HomePage() {
                     </div>
                 </div>
             </div>
-            <Footer></Footer>
+            {/* <Footer></Footer> */}
         </>
     );
 }

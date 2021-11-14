@@ -5,7 +5,7 @@ import Footer from '../components/client/Footer';
 const AboutPage = () => {
     return (
         <div>
-            <Header></Header>
+            {/* <Header></Header> */}
             <div className="div-content bg-gray-100 pb-8">
                 <div className="content bg-white mx-auto pb-3 px-3 pt-4" style={{ maxWidth: '1200px' }}>
                     <div className="content1">
@@ -64,7 +64,7 @@ const AboutPage = () => {
                     <div className="content3" />
                 </div>
             </div>
-            <Footer></Footer>
+            {/* <Footer></Footer> */}
         </div>
     )
 }
