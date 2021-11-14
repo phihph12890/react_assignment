@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
 import {
     BrowserRouter,
     Routes,
@@ -7,8 +8,20 @@ import {
     Outlet,
     Navigate
 } from "react-router-dom";
+import categoryApi from '../../api/categoryApi';
 
 const Categories = () => {
+
+    const [categories, setCategories] = useState([]);
+    useEffect(() => {
+        const getCategories = async () => {
+            const { data } = await categoryApi.list();
+            console.log(data)
+            setCategories(data)
+        }
+        getCategories();
+    }, [])
+
     return (
         <aside className="col-span-1 bg-gray-100">
             <div className="nav shadow-lg">
@@ -17,14 +30,11 @@ const Categories = () => {
                     <span className="ml-6 font-semibold">Danh mục</span></h2>
                 <ul>
                     <li>
-                        <NavLink to="/category" className="block text-sm font-semibold px-8 py-3 border-b border-l border-r border-gray-300 hover:bg-blue-300 hover:text-white">MACBOOK</NavLink>
-                        <NavLink to="/category" className="block text-sm font-semibold px-8 py-3 border-b border-l border-r border-gray-300 hover:bg-blue-300 hover:text-white">LAPTOP ACER</NavLink>
-                        <NavLink to="/category" className="block text-sm font-semibold px-8 py-3 border-b border-l border-r border-gray-300 hover:bg-blue-300 hover:text-white">LAPTOP DELL</NavLink>
-                        <NavLink to="/category" className="block text-sm font-semibold px-8 py-3 border-b border-l border-r border-gray-300 hover:bg-blue-300 hover:text-white">LAPTOP ASUS</NavLink>
-                        <NavLink to="/category" className="block text-sm font-semibold px-8 py-3 border-b border-l border-r border-gray-300 hover:bg-blue-300 hover:text-white">LAPTOP MSI</NavLink>
-                        <NavLink to="/category" className="block text-sm font-semibold px-8 py-3 border-b border-l border-r border-gray-300 hover:bg-blue-300 hover:text-white">LAPTOP LENOVO</NavLink>
-                        <NavLink to="/category" className="block text-sm font-semibold px-8 py-3 border-b border-l border-r border-gray-300 hover:bg-blue-300 hover:text-white">LAPTOP HP</NavLink>
-                        <NavLink to="/category" className="block text-sm font-semibold px-8 py-3 border-b border-l border-r border-gray-300 hover:bg-blue-300 hover:text-white">EVOO GAMING</NavLink>
+                        {categories.map(item => {
+                            return (
+                                <NavLink to={`/categories/${item._id}`}  className="block text-sm font-semibold px-8 py-3 border-b border-l border-r border-gray-300 hover:bg-blue-300 hover:text-white">{item.name}</NavLink>
+                            )
+                        })}
                     </li>
                 </ul>
             </div>

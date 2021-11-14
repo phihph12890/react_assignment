@@ -1,18 +1,31 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
+import productApi from '../api/productApi'
 
-import Header from '../components/client/Header';
+// import Header from '../components/client/Header';
 import Banner from '../components/client/Banner';
-import Footer from '../components/client/Footer';
+// import Footer from '../components/client/Footer';
 import Categories from '../components/client/Categories';
 import ProductItem from '../components/client/ProductItem';
+import ListProduct from '../components/client/ListProduct';
 
-export default function HomePage() {
+export default function HomePage(props) {
+    const [products, setProducts] = useState([]);
+    useEffect(() => {
+        const getProducts = async () => {
+            const { data } = await productApi.list();
+            console.log(data)
+            setProducts(data)
+        }
+        getProducts();
+    }, [])
+
     return (
         <>
             {/* <Header></Header> */}
             <Banner></Banner>
-            <div className="content bg-gray-100 pb-8" id="content">
-                <div className=" mx-auto grid grid-cols-4 gap-8 pt-5" style={{ width: '1200px' }}>
+            <div className="content bg-gray-100 pb-8 pt-8" id="content">
+                <div className=" mx-auto grid grid-cols-4 gap-8" style={{ width: '1200px' }}>
                     <aside className="col-span-1 bg-gray-100">
                         <Categories></Categories>
                         <div id="sticky" className="mt-8 sticky top-[30px]">
@@ -35,22 +48,8 @@ export default function HomePage() {
                                 <option value="40000000-990000000">Trên 40 triệu đồng</option>
                             </select>
                         </div>
-                        <div className="grid grid-cols-3 gap-6 gap-y-6 mt-5 text-center" id="list_product">
-                            <ProductItem></ProductItem>
-                            <ProductItem></ProductItem>
-                            <ProductItem></ProductItem>
-                            <ProductItem></ProductItem>
-                            <ProductItem></ProductItem>
-                            <ProductItem></ProductItem>
-                            <ProductItem></ProductItem>
-                            <ProductItem></ProductItem>
-                            <ProductItem></ProductItem>
-                            <ProductItem></ProductItem>
-                            <ProductItem></ProductItem>
-                            <ProductItem></ProductItem>
-                            <ProductItem></ProductItem>
-                            <ProductItem></ProductItem>
-                            <ProductItem></ProductItem>
+                        <div  id="list_product">
+                            <ListProduct data={products} />
                         </div>
                     </div>
                 </div>

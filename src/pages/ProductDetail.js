@@ -1,12 +1,12 @@
 import React from 'react';
-import Header from '../components/client/Header';
-import Footer from '../components/client/Footer';
+// import Header from '../components/client/Header';
+// import Footer from '../components/client/Footer';
 import Categories from '../components/client/Categories';
 
 const ProductDetail = () => {
     return (
         <div>
-            <Header></Header>
+            {/* <Header></Header> */}
             <div className="content bg-gray-100 pb-8 pt-5">
                 <div className=" mx-auto grid grid-cols-4 gap-5" style={{ width: '1200px' }}>
                     <aside className="col-span-1 bg-gray-100">
@@ -181,7 +181,7 @@ const ProductDetail = () => {
                     </div>
                 </div>
             </div>
-            <Footer></Footer>
+            {/* <Footer></Footer> */}
         </div>
     )
 }

@@ -1,12 +1,26 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
+import productApi from '../api/productApi'
 
-import Header from '../components/client/Header';
+// import Header from '../components/client/Header';
 // import Banner from '../components/client/Banner';
-import Footer from '../components/client/Footer';
+// import Footer from '../components/client/Footer';
 import Categories from '../components/client/Categories';
 import ProductItem from '../components/client/ProductItem';
+import ListProduct from '../components/client/ListProduct';
 
-export default function HomePage() {
+export default function CategoryPage() {
+
+    const [products, setProducts] = useState([]);
+    useEffect(() => {
+        const getProducts = async () => {
+            const { data } = await productApi.list();
+            console.log(data)
+            setProducts(data)
+        }
+        getProducts();
+    }, [])
+
     return (
         <>
             {/* <Header></Header> */}
@@ -24,14 +38,8 @@ export default function HomePage() {
                             <span><i className="fas fa-laptop" /> Sản phẩm</span><i className="fas fa-angle-double-right text-xs px-1" />
                             <span className="text-blue-600 font-semibold text-sm">MACBOOK</span>
                         </h5>
-                        <div className="grid grid-cols-3 gap-6 gap-y-6 mt-5 text-center">
-                        <ProductItem></ProductItem>
-                            <ProductItem></ProductItem>
-                            <ProductItem></ProductItem>
-                            <ProductItem></ProductItem>
-                            <ProductItem></ProductItem>
-                            <ProductItem></ProductItem>
-                            <ProductItem></ProductItem>
+                        <div>
+                            <ListProduct data={products} />
                         </div>
                     </div>
                 </div>

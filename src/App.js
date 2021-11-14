@@ -1,5 +1,5 @@
 import './App.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   BrowserRouter,
   Routes,
@@ -17,14 +17,47 @@ import ProductDetail from './pages/ProductDetail';
 import Header from './components/client/Header';
 import Footer from './components/client/Footer';
 
-// import { BrowserRouter, Route } from 'react-router-dom';
+import productApi from './api/productApi';
+import categoryApi from './api/categoryApi';
 
 
 export default function App() {
 
-  // return (
-  //   <ProductDetail></ProductDetail>
-  // );
+  const [showGoToTop, setShowGoToTop] = useState(false);
+  const ScrollTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setShowGoToTop(true)
+      } else {
+        setShowGoToTop(false)
+      }
+    }
+    window.addEventListener('scroll', handleScroll)
+  })
+
+  const [products, setProducts] = useState([]);
+  useEffect(() => {
+    const getProducts = async () => {
+      const { data } = await productApi.list();
+      console.log(data)
+      setProducts(data)
+    }
+    getProducts();
+  }, [])
+
+  const [categories, setCategories] = useState([]);
+  useEffect(() => {
+    const getCategories = async () => {
+      const { data } = await categoryApi.list();
+      console.log(data)
+      setCategories(data)
+    }
+    getCategories();
+  }, [])
+
   return (
     <div className="App">
       <BrowserRouter>
@@ -32,8 +65,9 @@ export default function App() {
           <Routes>
             {/* Layout Website */}
             <Route path="/" element={<LayoutWebsite />}>
-              <Route index element={<HomePage />} />
-              <Route path="category" element={<CategoryPage />} />
+              <Route index element={<HomePage data={products} />} />
+              <Route path="categories" element={<CategoryPage data={categories} />} />
+              <Route path="products" element={<ProductDetail />} />
               <Route path="contact" element={<ContactPage />} />
               <Route path="about" element={<AboutPage />} />
             </Route>
@@ -47,6 +81,12 @@ export default function App() {
           </Routes>
         </div>
       </BrowserRouter>
+
+      {showGoToTop && (
+        <button onClick={ScrollTop} className="fixed bg-blue-500 px-2 py-1 rounded-sm right-[50px] bottom-[50px] duration-300">
+          <span class="text-base text-white z-50"><i class="fas fa-arrow-up"></i></span>
+        </button>
+      )}
     </div>
   );
 

@@ -1,6 +1,6 @@
 import React from 'react';
-import Header from '../components/client/Header';
-import Footer from '../components/client/Footer';
+// import Header from '../components/client/Header';
+// import Footer from '../components/client/Footer';
 import Iframe from 'react-iframe'
 
 const ContactPage = () => {
