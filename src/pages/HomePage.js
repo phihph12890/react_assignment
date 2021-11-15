@@ -10,15 +10,8 @@ import ProductItem from '../components/client/ProductItem';
 import ListProduct from '../components/client/ListProduct';
 
 export default function HomePage(props) {
-    const [products, setProducts] = useState([]);
-    useEffect(() => {
-        const getProducts = async () => {
-            const { data } = await productApi.list();
-            console.log(data)
-            setProducts(data)
-        }
-        getProducts();
-    }, [])
+    console.log(props);
+
 
     return (
         <>
@@ -49,7 +42,7 @@ export default function HomePage(props) {
                             </select>
                         </div>
                         <div  id="list_product">
-                            <ListProduct data={products} />
+                            { props && props.data.length !== 0 ? <ListProduct data={props.data} /> :''}
                         </div>
                     </div>
                 </div>

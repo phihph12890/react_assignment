@@ -1,6 +1,8 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import productApi from '../api/productApi'
+import { useParams } from 'react-router-dom';
+import productApi from '../api/productApi';
+import categoryApi from '../api/categoryApi';
 
 // import Header from '../components/client/Header';
 // import Banner from '../components/client/Banner';
@@ -11,15 +13,25 @@ import ListProduct from '../components/client/ListProduct';
 
 export default function CategoryPage() {
 
+    const { id:idCategory } = useParams();
+    const [category, setCategory] = useState('');
+    useEffect(() => {
+        const getCategory = async () => {
+            const { data } = await categoryApi.read(idCategory);
+            console.log(data);
+            setCategory(data);
+        }
+        getCategory();
+    }, [idCategory])
+
     const [products, setProducts] = useState([]);
     useEffect(() => {
-        const getProducts = async () => {
-            const { data } = await productApi.list();
-            console.log(data)
-            setProducts(data)
+        const getProductsByCategory = async () => {
+            const { data } = await productApi.productByCategory(idCategory);
+            setProducts(data);
         }
-        getProducts();
-    }, [])
+        getProductsByCategory();
+    }, [products])
 
     return (
         <>
@@ -36,7 +48,7 @@ export default function CategoryPage() {
                     <div className="col-span-3">
                         <h5 className="mt-1">
                             <span><i className="fas fa-laptop" /> Sản phẩm</span><i className="fas fa-angle-double-right text-xs px-1" />
-                            <span className="text-blue-600 font-semibold text-sm">MACBOOK</span>
+                            <span className="text-blue-600 font-semibold text-sm">{category.name}</span>
                         </h5>
                         <div>
                             <ListProduct data={products} />

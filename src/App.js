@@ -1,5 +1,5 @@
 import './App.css';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useParams } from 'react';
 import {
   BrowserRouter,
   Routes,
@@ -66,8 +66,8 @@ export default function App() {
             {/* Layout Website */}
             <Route path="/" element={<LayoutWebsite />}>
               <Route index element={<HomePage data={products} />} />
-              <Route path="categories" element={<CategoryPage data={categories} />} />
-              <Route path="products" element={<ProductDetail />} />
+              <Route path="categories/:id" element={<CategoryPage data={categories} />} />
+              <Route path="products/:id" element={<ProductDetail />} />
               <Route path="contact" element={<ContactPage />} />
               <Route path="about" element={<AboutPage />} />
             </Route>

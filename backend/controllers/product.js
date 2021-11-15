@@ -54,7 +54,7 @@ export const create = (req, res) => {
 export const list = (req, res) => {
     let order = req.query.order ? req.query.order : 'asc';
     let sortBy = req.query.sortBy ? req.query.sortBy : '_id';
-    let limit = req.query.limit ? +req.query.limit : 6;
+    let limit = req.query.limit ? + req.query.limit : 6;
 
     Product.find()
         // .select("-image")
@@ -157,7 +157,7 @@ export const productByCategory = (req, res) => {
     })
 }
 export const relateProduct = (req, res) => {
-    let limit = req.query.limit ? req.query.limit : 4;
+    let limit = req.query.limit ? req.query.limit : 3;
 
     Product.find({
         _id: { $ne: req.product },
