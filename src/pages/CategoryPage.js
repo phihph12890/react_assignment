@@ -24,14 +24,14 @@ export default function CategoryPage() {
         getCategory();
     }, [idCategory])
 
-    const [products, setProducts] = useState([]);
+    const [productsByCategory, setProductsByCategory] = useState([]);
     useEffect(() => {
         const getProductsByCategory = async () => {
             const { data } = await productApi.productByCategory(idCategory);
-            setProducts(data);
+            setProductsByCategory(data);
         }
         getProductsByCategory();
-    }, [products])
+    }, [idCategory])
 
     return (
         <>
@@ -51,7 +51,7 @@ export default function CategoryPage() {
                             <span className="text-blue-600 font-semibold text-sm">{category.name}</span>
                         </h5>
                         <div>
-                            <ListProduct data={products} />
+                            <ListProduct data={productsByCategory} />
                         </div>
                     </div>
                 </div>

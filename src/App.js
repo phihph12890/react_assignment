@@ -98,10 +98,10 @@ function LayoutAdmin() {
         <NavLink to="/admin" activeClass="active">
           Dashboard
         </NavLink>
-        <NavLink to="/admin/product" activeClass="active">
+        <NavLink to="product" activeClass="active">
           Quản lý sản phẩm
         </NavLink>
-        <NavLink to="/admin/category" activeClass="active">
+        <NavLink to="category" activeClass="active">
           Quản lý danh mục
         </NavLink>
         <NavLink to="/" activeClass="active" className="text-red-500">
