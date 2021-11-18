@@ -61,7 +61,7 @@ export default function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <div className="">
+        <div>
           <Routes>
             {/* Layout Website */}
             <Route path="/" element={<LayoutWebsite />}>
@@ -84,7 +84,7 @@ export default function App() {
 
       {showGoToTop && (
         <button onClick={ScrollTop} className="fixed bg-blue-500 px-2 py-1 rounded-sm right-[50px] bottom-[50px] duration-300">
-          <span class="text-base text-white z-50"><i class="fas fa-arrow-up"></i></span>
+          <span className="text-base text-white z-50"><i className="fas fa-arrow-up"></i></span>
         </button>
       )}
     </div>

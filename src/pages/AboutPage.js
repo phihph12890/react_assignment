@@ -1,6 +1,7 @@
 import React from 'react';
 // import Header from '../components/client/Header';
 // import Footer from '../components/client/Footer';
+import { Link } from 'react-router-dom';
 
 const AboutPage = () => {
     return (
@@ -48,9 +49,9 @@ const AboutPage = () => {
                         <p> 🏪 Địa chỉ: Số 18, ngõ 121, Thái Hà, Đống Đa, TP Hà Nội</p>
                         <p>📲 Kinh doanh: 09865.02468 - 08586.02468</p>
                         <p>📲 Kỹ thuật: 08289.02468 - 0989.52.4004</p>
-                        <p>🌐 Website: <a className="hover:text-blue-500" href>https://laptopaz.vn/</a></p>
-                        <p> <span className="text-lg" style={{ marginLeft: '2px' }}><i className="fab fa-facebook-square" /></span> <a className="hover:text-blue-500" href>Facebook.com/LaptopAZ.vn</a></p>
-                        <p> <span style={{ marginLeft: '2px' }}><i className="fas fa-envelope" /></span><span> Email: </span><a href="#" className="text-blue-700 hover:text-blue-500"> hotrolaptopaz@gmail.com</a></p>
+                        <p>🌐 Website: <Link className="hover:text-blue-500" to="/">https://laptopaz.vn/</Link></p>
+                        <p> <span className="text-lg" style={{ marginLeft: '2px' }}><i className="fab fa-facebook-square" /></span> <Link className="hover:text-blue-500" to="/">Facebook.com/LaptopAZ.vn</Link></p>
+                        <p> <span style={{ marginLeft: '2px' }}><i className="fas fa-envelope" /></span><span> Email: </span><Link to="/" className="text-blue-700 hover:text-blue-500"> hotrolaptopaz@gmail.com</Link></p>
                         <p>🔴 Thời gian làm việc: 8h30h - 21h30 tất cả các ngày trong tuần</p>
                         <h2 className="font-bold ml-3 mt-5">HÌNH ẢNH KHÁCH HÀNG VÀ CÁC HOẠT ĐỘNG CỦA CHÚNG TÔI</h2>
                         <div className="grid grid-cols-2 gap-4 mt-2">

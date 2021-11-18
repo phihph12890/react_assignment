@@ -7,6 +7,7 @@ import ProductItem from '../components/client/ProductItem';
 import productApi from '../api/productApi';
 
 import { prices } from '../utils/util';
+import { Link } from 'react-router-dom';
 
 const ProductDetail = () => {
 
@@ -58,23 +59,23 @@ const ProductDetail = () => {
                                 <p className="text-sm"><span className="text-base text-green-500"><i className="fas fa-check-square" /></span> Mua hàng trước 15/01/2021 Giảm ngay 1.000.000 vnđ</p>
                                 <div className="mt-8">
                                     <div className="bg-red-500 rounded-lg text-center mt-3" style={{ width: '430px' }}>
-                                        <a href onclick="alert('Hãy đăng nhập để mua hàng!')">
+                                        <a >
                                             <p className="text-white font-bold text-lg pt-1">Thêm vào giỏ hàng</p>
                                             <p className="text-white font-semibold text-sm mt-1 pb-2">Giao tận nơi hoặc nhận ở cửa hàng</p>
                                         </a>
                                     </div>
                                     <div className="grid grid-cols-2 gap-2 mt-3" style={{ width: '430px' }}>
                                         <div className="bg-blue-500 rounded-lg text-center ml-1 hover:bg-blue-900">
-                                            <a href>
+                                            <Link to="/">
                                                 <p className="text-white font-bold text-sm pt-1">TRẢ GÓP % QUA THẺ</p>
                                                 <p className="text-white text-xs mt-1 pb-1">Visa, Master Card, JCB</p>
-                                            </a>
+                                            </Link>
                                         </div>
                                         <div className="bg-blue-500 rounded-lg text-center mr-1 hover:bg-blue-900">
-                                            <a href>
+                                            <Link to="/">
                                                 <p className="text-white font-bold text-sm pt-1">ĐĂNG KÝ TRẢ GÓP</p>
                                                 <p className="text-white text-xs mt-1 pb-1">Xét duyệt nhanh qua điện thoại</p>
-                                            </a>
+                                            </Link>
                                         </div>
                                     </div>
                                 </div>
@@ -108,11 +109,11 @@ const ProductDetail = () => {
                     </div>
                 </div>
                 <div className="mt-8 mx-auto bg-white shadow-md" style={{ width: '1200px' }}>
-                    <h4 className="font-bold text-lg mt-4 pl-4 py-2 border-b">Sản phẩm tương tự</h4>
+                    <h4 className="font-bold text-lg mt-4 pl-4 py-2 border-b">Sản phẩm liên quan</h4>
                     <div className="mx-auto grid grid-cols-3 gap-8 text-center mt-8 pb-8 px-8">
                         {productsRelated.map(item => {
                             return (
-                                <ProductItem product={item} className="w-" />
+                                <ProductItem key={item._id} product={item} />
                             )
                         })}
                     </div>

@@ -5,6 +5,7 @@ import {
     Routes,
     Route,
     NavLink,
+    Link,
     Outlet,
     Navigate
 } from "react-router-dom";
@@ -32,7 +33,7 @@ const Categories = () => {
                     <li>
                         {categories.map(item => {
                             return (
-                                <NavLink to={`/categories/${item._id}`}  className="block text-sm font-semibold px-8 py-3 border-b border-l border-r border-gray-300 hover:bg-blue-300 hover:text-white">{item.name}</NavLink>
+                                <Link to={`/categories/${item._id}`} key={item._id} className="block text-sm font-semibold px-8 py-3 border-b border-l border-r border-gray-300 hover:bg-blue-300 hover:text-white">{item.name}</Link>
                             )
                         })}
                     </li>

@@ -28,13 +28,13 @@ export default function HomePage(props) {
                     </aside>
                     <div className="col-span-3">
                         <div className="mx-auto flex">
-                            <select className="form-control rounded-md font-semibold px-3" name id="sort" style={{ width: '240px' }}>
-                                <option value selected disabled> --- Sắp xếp sản phẩm --- </option>
+                            <select className="form-control rounded-md font-semibold px-3" id="sort" style={{ width: '240px' }}>
+                                <option value defaultValue disabled> --- Sắp xếp sản phẩm --- </option>
                                 <option value="asc">Giá từ thấp đến cao</option>
                                 <option value="desc">Giá từ cao đến thấp</option>
                             </select>
-                            <select className="form-control rounded-md font-semibold px-2 ml-3" name id="filter" style={{ width: '255px' }}>
-                                <option value selected disabled> --- Lọc sản phẩm theo giá --- </option>
+                            <select className="form-control rounded-md font-semibold px-2 ml-3" id="filter" style={{ width: '255px' }}>
+                                <option value defaultValue disabled> --- Lọc sản phẩm theo giá --- </option>
                                 <option value="0-1500000">Dưới 15 triệu đồng</option>
                                 <option value="15000000-30000000">15 triệu - 30 triệu</option>
                                 <option value="30000000-40000000">30 triệu - 40 triệu</option>
