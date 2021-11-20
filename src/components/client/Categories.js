@@ -1,14 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import {
-    BrowserRouter,
-    Routes,
-    Route,
-    NavLink,
-    Link,
-    Outlet,
-    Navigate
-} from "react-router-dom";
+import { Link } from "react-router-dom";
 import categoryApi from '../../api/categoryApi';
 
 const Categories = () => {

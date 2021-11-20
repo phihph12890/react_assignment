@@ -20,11 +20,11 @@ router.get('/products/related/:productId', relateProduct);
 //Chi tiết sản phẩm
 router.get('/products/:productId', read);
 //Thêm mới sản phẩm 
-router.post('/products/:userId', requireSignin, isAuth, isAdmin, create);
+router.post('/products', create);
 //Cập nhật sản phẩm
-router.put('/products/:productId/:userId', requireSignin, isAuth, isAdmin, update);
+router.put('/products/:productId', update);
 //Xoá sản phẩm
-router.delete('/products/:productId/:userId', requireSignin, isAuth, isAdmin, remove);
+router.delete('/products/:productId', remove);
 
 //Lấy param
 router.param('categoryId', categoryById);

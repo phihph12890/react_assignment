@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const axiosClient = axios.create({
-    baseURL: 'http://localhost:4000/api',
+    baseURL: 'https://db-laptop.herokuapp.com/api',
     headers: {
         'Content-Type': 'application/json',
         // 'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('token'))

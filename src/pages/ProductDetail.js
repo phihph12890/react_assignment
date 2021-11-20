@@ -113,7 +113,7 @@ const ProductDetail = () => {
                     <div className="mx-auto grid grid-cols-3 gap-8 text-center mt-8 pb-8 px-8">
                         {productsRelated.map(item => {
                             return (
-                                <ProductItem key={item._id} product={item} />
+                                <ProductItem key={item._id} product={item} className="" />
                             )
                         })}
                     </div>
