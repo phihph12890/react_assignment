@@ -191,11 +191,12 @@ export const search = (req, res) => {
 export const filterPrice = (req, res) => {
     let price1 = req.query.price1 ? req.query.price1 : "";
     let price2 = req.query.price2 ? req.query.price2 : "";
-    // console.log("price1", price1);
-    // console.log("price2", price2);
     Product.find({
         $and: [{ 'priceSale': { $gte: price1 } }, { 'priceSale': { $lte: price2 } }]
-    }).exec((err, products) => {
+    }).sort({
+        priceSale: 1
+    })
+    .exec((err, products) => {
         if (err) {
             res.status(400).json({
                 error: "Product not found"

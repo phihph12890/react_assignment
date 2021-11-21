@@ -1,14 +1,6 @@
 import React from 'react';
 import Marquee from "react-fast-marquee";
-import {
-    BrowserRouter,
-    Routes,
-    Route,
-    NavLink,
-    Link,
-    Outlet,
-    Navigate
-} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Header = () => {
     return (
@@ -16,7 +8,7 @@ const Header = () => {
             <div className="header">
                 <div className=" container mx-auto flex py-1 justify-between items-center " style={{ maxWidth: '1200px' }}>
                     <div>
-                        <NavLink to="/"><img className="h-24 w-40" src="https://laptopaz.vn/media/banner/logo_laptopaz%20(2).jpg" alt="" /></NavLink>
+                        <Link to="/"><img className="h-24 w-40" src="https://laptopaz.vn/media/banner/logo_laptopaz%20(2).jpg" alt="" /></Link>
                     </div>
                     <div>
                         <form>
@@ -28,9 +20,13 @@ const Header = () => {
                         <p className="text-red-600 text-sm"><span><i className="fas fa-phone-alt" /></span> HOTLINE</p>
                         <p className="text-sm ">09865.02468 - 08586.02468</p>
                         <p className="text-sm">Địa chỉ: Số 18, ngõ 121, Thái Hà, Đống Đa, Hà Nội</p>
-                        <div className="bg-blue-500 rounded-md text-white mt-1">
-                            <NavLink className="mr-8 " to="/about">Giới thiệu</NavLink>
-                            <NavLink to="/contact">Liên hệ</NavLink>
+                        <div className="flex justify-center">
+                            <Link to="/about" className="bg-blue-500 hover:bg-blue-700 rounded-md text-white mt-1 w-[150px]">
+                                Giới thiệu
+                            </Link>
+                            <Link to="/contact" className="bg-blue-500 hover:bg-blue-700 rounded-md text-white mt-1 w-[150px] ml-3">
+                                Liên hệ
+                            </Link>
                         </div>
                     </div>
                     <div className="items-center">
@@ -52,7 +48,7 @@ const Header = () => {
             </div>
             <div className=" bg-blue-500">
                 <div className="mx-auto" style={{ width: '1200px' }}>
-                    <Marquee gradient='false'>
+                    <Marquee>
                         <p className="text-white font-semibold py-1">
                             <span>Địa chỉ: Số 18, ngõ 121, Thái Hà, Đống Đa, Hà Nội.</span>
                             <span className="ml-8">Hotline: 09865.02468 - 08586.02468.</span>

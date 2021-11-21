@@ -59,10 +59,10 @@ const ProductDetail = () => {
                                 <p className="text-sm"><span className="text-base text-green-500"><i className="fas fa-check-square" /></span> Mua hàng trước 15/01/2021 Giảm ngay 1.000.000 vnđ</p>
                                 <div className="mt-8">
                                     <div className="bg-red-500 rounded-lg text-center mt-3" style={{ width: '430px' }}>
-                                        <a >
+                                        <button>
                                             <p className="text-white font-bold text-lg pt-1">Thêm vào giỏ hàng</p>
                                             <p className="text-white font-semibold text-sm mt-1 pb-2">Giao tận nơi hoặc nhận ở cửa hàng</p>
-                                        </a>
+                                        </button>
                                     </div>
                                     <div className="grid grid-cols-2 gap-2 mt-3" style={{ width: '430px' }}>
                                         <div className="bg-blue-500 rounded-lg text-center ml-1 hover:bg-blue-900">

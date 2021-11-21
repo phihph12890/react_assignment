@@ -6,13 +6,36 @@ import productApi from '../api/productApi'
 import Banner from '../components/client/Banner';
 // import Footer from '../components/client/Footer';
 import Categories from '../components/client/Categories';
-import ProductItem from '../components/client/ProductItem';
 import ListProduct from '../components/client/ListProduct';
 
-export default function HomePage(props) {
-    console.log(props);
+export default function HomePage() {
+    const [products, setProducts] = useState([]);
+    useEffect(() => {
+        const getProducts = async () => {
+            const { data } = await productApi.list();
+            setProducts(data);
+        }
+        getProducts();
+    }, [])
 
+    const handleSort = (e) => {
+        let level = e.target.value;
+        const sortProducts = async () => {
+            const { data } = await productApi.sortPrice(level)
+            setProducts(data);
+        }
+        sortProducts();
+    }
 
+    const handleFilter = (e) => {
+        let [priceMin, priceMax] = e.target.value.split("-");
+        const filterProducts = async () => {
+            const { data } = await productApi.filterPrice(priceMin, priceMax);
+            console.log(data)
+            setProducts(data);
+        }
+        filterProducts();
+    }
     return (
         <>
             {/* <Header></Header> */}
@@ -28,21 +51,21 @@ export default function HomePage(props) {
                     </aside>
                     <div className="col-span-3">
                         <div className="mx-auto flex">
-                            <select className="form-control rounded-md font-semibold px-3" id="sort" style={{ width: '240px' }}>
-                                <option value defaultValue disabled> --- Sắp xếp sản phẩm --- </option>
+                            <select onChange={handleSort} className="form-control rounded-md font-semibold px-[27px]" id="sort" style={{ width: '240px' }}>
+                                <option value="asc"> --- Sắp xếp sản phẩm --- </option>
                                 <option value="asc">Giá từ thấp đến cao</option>
                                 <option value="desc">Giá từ cao đến thấp</option>
                             </select>
-                            <select className="form-control rounded-md font-semibold px-2 ml-3" id="filter" style={{ width: '255px' }}>
-                                <option value defaultValue disabled> --- Lọc sản phẩm theo giá --- </option>
-                                <option value="0-1500000">Dưới 15 triệu đồng</option>
+                            <select onChange={handleFilter} className="form-control rounded-md font-semibold px-3 ml-3" id="filter" style={{ width: '250px' }}>
+                                <option value="0-990000000"> --- Lọc sản phẩm theo giá --- </option>
+                                <option value="0-15000000">Dưới 15 triệu đồng</option>
                                 <option value="15000000-30000000">15 triệu - 30 triệu</option>
                                 <option value="30000000-40000000">30 triệu - 40 triệu</option>
                                 <option value="40000000-990000000">Trên 40 triệu đồng</option>
                             </select>
                         </div>
-                        <div  id="list_product">
-                            { props && props.data.length !== 0 ? <ListProduct data={props.data} /> :''}
+                        <div id="list_product">
+                            {products && products.length !== 0 ? <ListProduct data={products} /> : ''}
                         </div>
                     </div>
                 </div>

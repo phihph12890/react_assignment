@@ -1,5 +1,5 @@
 import './App.css';
-import { useState, useEffect, useParams } from 'react';
+import { useState, useEffect } from 'react';
 import {
   BrowserRouter,
   Routes,
@@ -16,10 +16,6 @@ import CategoryPage from './pages/CategoryPage';
 import ProductDetail from './pages/ProductDetail';
 import Header from './components/client/Header';
 import Footer from './components/client/Footer';
-
-import productApi from './api/productApi';
-import categoryApi from './api/categoryApi';
-
 
 export default function App() {
 
@@ -38,26 +34,6 @@ export default function App() {
     window.addEventListener('scroll', handleScroll)
   })
 
-  const [products, setProducts] = useState([]);
-  useEffect(() => {
-    const getProducts = async () => {
-      const { data } = await productApi.list();
-      console.log(data)
-      setProducts(data)
-    }
-    getProducts();
-  }, [])
-
-  const [categories, setCategories] = useState([]);
-  useEffect(() => {
-    const getCategories = async () => {
-      const { data } = await categoryApi.list();
-      console.log(data)
-      setCategories(data)
-    }
-    getCategories();
-  }, [])
-
   return (
     <div className="App">
       <BrowserRouter>
@@ -65,8 +41,8 @@ export default function App() {
           <Routes>
             {/* Layout Website */}
             <Route path="/" element={<LayoutWebsite />}>
-              <Route index element={<HomePage data={products} />} />
-              <Route path="categories/:id" element={<CategoryPage data={categories} />} />
+              <Route index element={<HomePage />} />
+              <Route path="categories/:id" element={<CategoryPage />} />
               <Route path="products/:id" element={<ProductDetail />} />
               <Route path="contact" element={<ContactPage />} />
               <Route path="about" element={<AboutPage />} />
@@ -83,7 +59,7 @@ export default function App() {
       </BrowserRouter>
 
       {showGoToTop && (
-        <button onClick={ScrollTop} className="fixed bg-blue-500 px-2 py-1 rounded-sm right-[50px] bottom-[50px] duration-300">
+        <button onClick={ScrollTop} className="fixed bg-blue-500 hover:bg-blue-700 px-2 py-1 rounded-sm right-[50px] bottom-[50px] duration-300">
           <span className="text-base text-white z-50"><i className="fas fa-arrow-up"></i></span>
         </button>
       )}

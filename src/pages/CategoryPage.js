@@ -3,22 +3,21 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import productApi from '../api/productApi';
 import categoryApi from '../api/categoryApi';
+import { Link } from 'react-router-dom';
 
 // import Header from '../components/client/Header';
 // import Banner from '../components/client/Banner';
 // import Footer from '../components/client/Footer';
 import Categories from '../components/client/Categories';
-import ProductItem from '../components/client/ProductItem';
 import ListProduct from '../components/client/ListProduct';
 
 export default function CategoryPage() {
 
-    const { id:idCategory } = useParams();
+    const { id: idCategory } = useParams();
     const [category, setCategory] = useState('');
     useEffect(() => {
         const getCategory = async () => {
             const { data } = await categoryApi.read(idCategory);
-            console.log(data);
             setCategory(data);
         }
         getCategory();
@@ -51,7 +50,18 @@ export default function CategoryPage() {
                             <span className="text-blue-600 font-semibold text-sm">{category.name}</span>
                         </h5>
                         <div>
-                            <ListProduct data={productsByCategory} />
+                            {productsByCategory.length !== 0 ? <ListProduct data={productsByCategory} /> :
+                                <div class=" text-center mx-48 mt-20">
+                                    <div class="text-4xl font-semibold">Không có sản phẩm <i class="far fa-sad-tear"></i></div>
+                                    <div className="mt-[20px]">
+                                        <Link to="/">
+                                            <button class="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 border border-blue-700 rounded">
+                                                Trang chủ
+                                            </button>
+                                        </Link>
+                                    </div>
+                                </div>
+                            }
                         </div>
                     </div>
                 </div>
