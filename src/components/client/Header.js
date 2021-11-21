@@ -1,8 +1,15 @@
 import React from 'react';
+import { useState } from 'react';
 import Marquee from "react-fast-marquee";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Header = () => {
+    const [searchText, setSearchText] = useState('');
+    const navigate = useNavigate();
+    const handleSearch = (e) => {
+        e.preventDefault();
+        navigate(`/search?name=${searchText}`)
+    }
     return (
         <div>
             <div className="header">
@@ -11,8 +18,8 @@ const Header = () => {
                         <Link to="/"><img className="h-24 w-40" src="https://laptopaz.vn/media/banner/logo_laptopaz%20(2).jpg" alt="" /></Link>
                     </div>
                     <div>
-                        <form>
-                            <input className="search-input py-2 px-3 border border-blue-500 text-sm outline-none" id="inputSearch" type="text" placeholder="Bạn muốn tìm sản phẩm gì?" style={{ width: '370px' }} />
+                        <form onSubmit={handleSearch}>
+                            <input className="search-input py-2 px-3 border border-blue-500 text-sm outline-none" onChange={(e) => { setSearchText(e.target.value) }} type="text" placeholder="Bạn muốn tìm sản phẩm gì?" style={{ width: '370px' }} />
                             <input className="-ml-2 bg-blue-500 border border-blue-500 text-white text-sm px-2 py-2 cursor-pointer" id="btn_search" type="submit" defaultValue="Search" />
                         </form>
                     </div>

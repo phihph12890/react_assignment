@@ -16,6 +16,7 @@ import CategoryPage from './pages/CategoryPage';
 import ProductDetail from './pages/ProductDetail';
 import Header from './components/client/Header';
 import Footer from './components/client/Footer';
+import SearchPage from './pages/SearchPage';
 
 export default function App() {
 
@@ -44,6 +45,7 @@ export default function App() {
               <Route index element={<HomePage />} />
               <Route path="categories/:id" element={<CategoryPage />} />
               <Route path="products/:id" element={<ProductDetail />} />
+              <Route path="search" element={<SearchPage />} />
               <Route path="contact" element={<ContactPage />} />
               <Route path="about" element={<AboutPage />} />
             </Route>
@@ -91,7 +93,7 @@ function LayoutAdmin() {
 function LayoutWebsite() {
   return (
     <div>
-      <Header></Header>
+      <Header ></Header>
       <Outlet />
       <Footer></Footer>
     </div>

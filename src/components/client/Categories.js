@@ -9,7 +9,6 @@ const Categories = () => {
     useEffect(() => {
         const getCategories = async () => {
             const { data } = await categoryApi.list();
-            console.log(data)
             setCategories(data)
         }
         getCategories();
