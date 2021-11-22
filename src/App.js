@@ -4,7 +4,6 @@ import {
   BrowserRouter,
   Routes,
   Route,
-  NavLink,
   Outlet,
   Navigate
 } from "react-router-dom";
@@ -17,6 +16,14 @@ import ProductDetail from './pages/ProductDetail';
 import Header from './components/client/Header';
 import Footer from './components/client/Footer';
 import SearchPage from './pages/SearchPage';
+
+import AdminLayout from './components/admin/AdminLayout';
+import AdminCategoryManagerPage from './pages/AdminCategoryManagerPage';
+import AdminProductManagerPage from './pages/AdminProductManagerPage';
+import Dashboard from './pages/Dashboard';
+
+import "react-toastify/dist/ReactToastify.css";
+
 
 export default function App() {
 
@@ -53,8 +60,9 @@ export default function App() {
             {/* Layout Admin */}
             <Route path="admin/*" element={<LayoutAdmin />}>
               <Route index element={<Navigate to="dashboard" />} />
-              <Route path="dashboard" element={<div>Dashboard</div>} />
-              <Route path="product" element={<div>Product Manager</div>} />
+              <Route path="dashboard" element={<Dashboard />} />
+              <Route path="products" element={<AdminProductManagerPage />} />
+              <Route path="categories" element={<AdminCategoryManagerPage />} />
             </Route>
           </Routes>
         </div>
@@ -72,21 +80,7 @@ export default function App() {
 function LayoutAdmin() {
   return (
     <div>
-      <div className="flex space-x-5">
-        <NavLink to="/admin" activeClass="active">
-          Dashboard
-        </NavLink>
-        <NavLink to="product" activeClass="active">
-          Quản lý sản phẩm
-        </NavLink>
-        <NavLink to="category" activeClass="active">
-          Quản lý danh mục
-        </NavLink>
-        <NavLink to="/" activeClass="active" className="text-red-500">
-          Back to website
-        </NavLink>
-      </div>
-      <Outlet />
+      <AdminLayout />
     </div>
   );
 }
