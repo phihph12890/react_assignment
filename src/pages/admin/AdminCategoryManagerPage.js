@@ -1,30 +1,20 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import { Link } from 'react-router-dom';
-import categoryApi from '../api/categoryApi';
+import { Category_remove } from '../../slice/categorySlice';
+
+
 
 const AdminCategoryManagerPage = () => {
 
-    const [categories, setCategories] = useState([]);
-    useEffect(() => {
-        const getCategories = async () => {
-            const { data } = await categoryApi.list();
-            setCategories(data);
-        }
-        getCategories();
-    }, [categories])
+    const dispatch = useDispatch();
+    const categories = useSelector((state) => {
+        return state.category.data
+    })
 
-    const handleRemove = async (id) => {
-        try {
-            const { data } = await categoryApi.remove(id);
-            const newCategories = categories.filter(item => item._id !== data._id);
-            toast.success("Xoá danh mục thành công!");
-            setCategories(newCategories);
-        } catch (error) {
-            toast.error(error.response.data);
-        }
-    }
+
     return (
         <>
             <ToastContainer />
@@ -59,7 +49,7 @@ const AdminCategoryManagerPage = () => {
                                                 </Link>
                                             </td>
                                             <td>
-                                                <button onClick={() => { handleRemove(item._id) }} data-id={item._id} className="text-sm px-1 rounded-lg bg-red-500 hover:bg-red-700 text-white btn btn-danger btn-remove">
+                                                <button onClick={() => { dispatch(Category_remove(item._id)) }} className="text-sm px-1 rounded-lg bg-red-500 hover:bg-red-700 text-white btn btn-danger btn-remove">
                                                     <i className="px-1 fas fa-trash-alt" />
                                                 </button>
                                             </td>

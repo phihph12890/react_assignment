@@ -1,36 +1,27 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import productApi from '../api/productApi';
-import categoryApi from '../api/categoryApi';
+import { useLocation } from 'react-router-dom';
+import productApi from '../../api/productApi';
 import { Link } from 'react-router-dom';
 
-// import Header from '../components/client/Header';
-// import Banner from '../components/client/Banner';
-// import Footer from '../components/client/Footer';
-import Categories from '../components/client/Categories';
-import ListProduct from '../components/client/ListProduct';
+import Categories from '../../components/client/Categories';
+import ListProduct from '../../components/client/ListProduct';
 
-export default function CategoryPage() {
+export default function SearchPage() {
 
-    const { id: idCategory } = useParams();
-    const [category, setCategory] = useState('');
+    const [products, setProducts] = useState([]);
+
+    const location = useLocation();
+    const params = new URLSearchParams(location.search);
+    const textSearch = params.get('name');
+
     useEffect(() => {
-        const getCategory = async () => {
-            const { data } = await categoryApi.read(idCategory);
-            setCategory(data);
+        const getProduct = async () => {
+            const { data } = await productApi.search(textSearch);
+            setProducts(data)
         }
-        getCategory();
-    }, [idCategory])
-
-    const [productsByCategory, setProductsByCategory] = useState([]);
-    useEffect(() => {
-        const getProductsByCategory = async () => {
-            const { data } = await productApi.productByCategory(idCategory);
-            setProductsByCategory(data);
-        }
-        getProductsByCategory();
-    }, [idCategory])
+        getProduct();
+    }, [textSearch])
 
     return (
         <>
@@ -46,13 +37,13 @@ export default function CategoryPage() {
                     </aside>
                     <div className="col-span-3">
                         <h5 className="mt-1">
-                            <span><i className="fas fa-laptop" /> Sản phẩm</span><i className="fas fa-angle-double-right text-xs px-1" />
-                            <span className="text-blue-600 font-semibold text-sm">{category.name}</span>
+                            <span><i className="fas fa-search"></i> Tìm kiếm</span>:
+                            <span className="text-blue-600 font-semibold text-base"> {textSearch}</span>
                         </h5>
                         <div>
-                            {productsByCategory.length !== 0 ? <ListProduct data={productsByCategory} /> :
+                            {products.length !== 0 ? <ListProduct data={products} /> :
                                 <div className=" text-center mx-48 mt-20">
-                                    <div className="text-4xl font-semibold">Không có sản phẩm <i className="far fa-sad-tear"></i></div>
+                                    <div className="text-4xl font-semibold">Không tìm thấy sản phẩm <i className="far fa-sad-tear"></i></div>
                                     <div className="mt-[20px]">
                                         <Link to="/">
                                             <button className="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 border border-blue-700 rounded">

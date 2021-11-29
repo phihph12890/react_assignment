@@ -47,14 +47,14 @@ export const read = (req, res) => {
 }
 export const remove = (req, res) => {
     let category = req.category;
-    category.remove((err, deletedCategory) => {
+    category.remove((err, data) => {
         if (err) {
             return res.status(400).json({
                 error: "Không xoá được danh mục!"
             });
         }
         res.json({
-            deletedCategory,
+            data,
             message: "Xoá danh mục thành công"
         })
     })

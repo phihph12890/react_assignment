@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-// import Header from '../components/client/Header';
-// import Footer from '../components/client/Footer';
-import Categories from '../components/client/Categories';
-import ProductItem from '../components/client/ProductItem';
-import productApi from '../api/productApi';
-
-import { prices } from '../utils/util';
+import Categories from '../../components/client/Categories';
+import ProductItem from '../../components/client/ProductItem';
+import productApi from '../../api/productApi';
+import { prices } from '../../utils/util';
 import { Link } from 'react-router-dom';
 
 const ProductDetail = () => {

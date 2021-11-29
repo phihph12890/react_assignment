@@ -1,5 +1,6 @@
 import './App.css';
 import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from "react-redux";
 import {
   BrowserRouter,
   Routes,
@@ -8,25 +9,26 @@ import {
   Navigate
 } from "react-router-dom";
 
-import HomePage from './pages/HomePage';
-import AboutPage from './pages/AboutPage';
-import ContactPage from './pages/ContactPage';
-import CategoryPage from './pages/CategoryPage';
-import ProductDetail from './pages/ProductDetail';
 import Header from './components/client/Header';
 import Footer from './components/client/Footer';
-import SearchPage from './pages/SearchPage';
+import HomePage from './pages/client/HomePage';
+import AboutPage from './pages/client/AboutPage';
+import ContactPage from './pages/client/ContactPage';
+import CategoryPage from './pages/client/CategoryPage';
+import ProductDetail from './pages/client/ProductDetail';
+import SearchPage from './pages/client/SearchPage';
 
 import AdminLayout from './components/admin/AdminLayout';
-import AdminCategoryManagerPage from './pages/AdminCategoryManagerPage';
-import AdminProductManagerPage from './pages/AdminProductManagerPage';
-import Dashboard from './pages/Dashboard';
+import AdminCategoryManagerPage from './pages/admin/AdminCategoryManagerPage';
+import AdminProductManagerPage from './pages/admin/AdminProductManagerPage';
+import Dashboard from './pages/admin/Dashboard';
 
 import "react-toastify/dist/ReactToastify.css";
+import { Category_list } from './slice/categorySlice'
 
 
 export default function App() {
-
+  const dispatch = useDispatch()
   const [showGoToTop, setShowGoToTop] = useState(false);
   const ScrollTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -40,6 +42,10 @@ export default function App() {
       }
     }
     window.addEventListener('scroll', handleScroll)
+  })
+
+  useEffect(() => {
+    dispatch(Category_list())
   })
 
   return (

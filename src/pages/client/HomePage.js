@@ -1,12 +1,9 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import productApi from '../api/productApi'
-
-// import Header from '../components/client/Header';
-import Banner from '../components/client/Banner';
-// import Footer from '../components/client/Footer';
-import Categories from '../components/client/Categories';
-import ListProduct from '../components/client/ListProduct';
+import productApi from '../../api/productApi'
+import Banner from '../../components/client/Banner';
+import Categories from '../../components/client/Categories';
+import ListProduct from '../../components/client/ListProduct';
 
 export default function HomePage() {
     const [products, setProducts] = useState([]);
