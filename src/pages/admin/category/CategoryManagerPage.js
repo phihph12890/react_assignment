@@ -1,19 +1,42 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
+// import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import { Link } from 'react-router-dom';
-import { Category_remove } from '../../slice/categorySlice';
+import { Category_remove } from '../../../slice/categorySlice';
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
+import productApi from '../../../api/productApi';
 
 
 const AdminCategoryManagerPage = () => {
+
+    const submit = (id) => {
+        confirmAlert({
+            title: 'XÁC NHẬN?',
+            message: 'Bạn có chắc chắn muốn xoá?',
+            buttons: [
+                {
+                    label: 'Yes',
+                    onClick: () => {
+                        dispatch(Category_remove(id))
+                        toast.success("Xoá thành công!")
+                    }
+                },
+                {
+                    label: 'No',
+                    onClick: () => {
+                    }
+                }
+            ]
+        });
+    };
 
     const dispatch = useDispatch();
     const categories = useSelector((state) => {
         return state.category.data
     })
-
 
     return (
         <>
@@ -49,7 +72,16 @@ const AdminCategoryManagerPage = () => {
                                                 </Link>
                                             </td>
                                             <td>
-                                                <button onClick={() => { dispatch(Category_remove(item._id)) }} className="text-sm px-1 rounded-lg bg-red-500 hover:bg-red-700 text-white btn btn-danger btn-remove">
+                                                <button
+                                                    onClick={async () => {
+                                                        let { data } = await productApi.productByCategory(item._id)
+                                                        if (data.length == 0) {
+                                                            submit(item._id)
+                                                        } else {
+                                                            toast.warning("Hãy xoá hết sản phẩm thuộc danh mục này trước khi muốn xoá danh mục!")
+                                                        }
+                                                    }}
+                                                    className="text-sm px-1 rounded-lg bg-red-500 hover:bg-red-700 text-white btn btn-danger btn-remove">
                                                     <i className="px-1 fas fa-trash-alt" />
                                                 </button>
                                             </td>

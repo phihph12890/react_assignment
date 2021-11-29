@@ -84,11 +84,11 @@ const categorySlice = createSlice({
             Category_remove.fulfilled,
             (state, action) => {
                 state.loading = false;
-                console.log(action.payload);
-                // let index = state.data.findIndex(
-                //     (item) => item._id === action.payload.data._id
-                // );
-                // state.data.splice(index, 1);
+
+                let index = state.data.findIndex(
+                    (item) => item._id === action.payload.data._id
+                );
+                state.data.splice(index, 1);
             }
         );
     }

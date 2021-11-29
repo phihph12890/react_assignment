@@ -1,6 +1,6 @@
 import './App.css';
 import { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from "react-redux";
+import {  useDispatch } from "react-redux";
 import {
   BrowserRouter,
   Routes,
@@ -19,8 +19,8 @@ import ProductDetail from './pages/client/ProductDetail';
 import SearchPage from './pages/client/SearchPage';
 
 import AdminLayout from './components/admin/AdminLayout';
-import AdminCategoryManagerPage from './pages/admin/AdminCategoryManagerPage';
-import AdminProductManagerPage from './pages/admin/AdminProductManagerPage';
+import CategoryManagerPage from './pages/admin/category/CategoryManagerPage';
+import ProductManagerPage from './pages/admin/ProductManagerPage';
 import Dashboard from './pages/admin/Dashboard';
 
 import "react-toastify/dist/ReactToastify.css";
@@ -67,8 +67,8 @@ export default function App() {
             <Route path="admin/*" element={<LayoutAdmin />}>
               <Route index element={<Navigate to="dashboard" />} />
               <Route path="dashboard" element={<Dashboard />} />
-              <Route path="products" element={<AdminProductManagerPage />} />
-              <Route path="categories" element={<AdminCategoryManagerPage />} />
+              <Route path="products" element={<ProductManagerPage />} />
+              <Route path="categories" element={<CategoryManagerPage />} />
             </Route>
           </Routes>
         </div>
