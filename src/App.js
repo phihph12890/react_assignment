@@ -1,13 +1,7 @@
 import './App.css';
 import { useState, useEffect } from 'react';
-import {  useDispatch } from "react-redux";
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  Outlet,
-  Navigate
-} from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { BrowserRouter, Routes, Route, Outlet, Navigate } from "react-router-dom";
 
 import Header from './components/client/Header';
 import Footer from './components/client/Footer';
@@ -19,16 +13,21 @@ import ProductDetail from './pages/client/ProductDetail';
 import SearchPage from './pages/client/SearchPage';
 
 import AdminLayout from './components/admin/AdminLayout';
+import CategoryAddPage from './pages/admin/category/CategoryAddPage';
 import CategoryManagerPage from './pages/admin/category/CategoryManagerPage';
 import ProductManagerPage from './pages/admin/ProductManagerPage';
+import CategoryUpdatePage from './pages/admin/category/CategoryUpdatePage';
 import Dashboard from './pages/admin/Dashboard';
 
 import "react-toastify/dist/ReactToastify.css";
-import { Category_list } from './slice/categorySlice'
+import { Category_list } from './slice/categorySlice';
+import { Product_list } from './slice/productSlice';
 
 
 export default function App() {
+
   const dispatch = useDispatch()
+
   const [showGoToTop, setShowGoToTop] = useState(false);
   const ScrollTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -46,6 +45,7 @@ export default function App() {
 
   useEffect(() => {
     dispatch(Category_list())
+    dispatch(Product_list())
   })
 
   return (
@@ -69,6 +69,8 @@ export default function App() {
               <Route path="dashboard" element={<Dashboard />} />
               <Route path="products" element={<ProductManagerPage />} />
               <Route path="categories" element={<CategoryManagerPage />} />
+              <Route path="categories/add" element={<CategoryAddPage />} />
+              <Route path="categories/update/:id" element={<CategoryUpdatePage />} />
             </Route>
           </Routes>
         </div>

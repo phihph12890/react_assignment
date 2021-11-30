@@ -1,5 +1,4 @@
 import React from 'react';
-// import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import { Link } from 'react-router-dom';
@@ -10,7 +9,12 @@ import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 import productApi from '../../../api/productApi';
 
 
-const AdminCategoryManagerPage = () => {
+const CategoryManagerPage = () => {
+
+    const dispatch = useDispatch();
+    const categories = useSelector((state) => {
+        return state.category.data
+    })
 
     const submit = (id) => {
         confirmAlert({
@@ -32,11 +36,6 @@ const AdminCategoryManagerPage = () => {
             ]
         });
     };
-
-    const dispatch = useDispatch();
-    const categories = useSelector((state) => {
-        return state.category.data
-    })
 
     return (
         <>
@@ -67,7 +66,7 @@ const AdminCategoryManagerPage = () => {
                                             <th scope="row" style={{ width: '100px' }}>{index + 1}</th>
                                             <td className="font-semibold" style={{ width: '480px' }}>{item.name}</td>
                                             <td>
-                                                <Link className="text-sm px-1 rounded-lg bg-blue-500 hover:bg-blue-700 text-white btn btn-primary" to="/admin/category-update/{{cate._id}}">
+                                                <Link className="text-sm px-1 rounded-lg bg-blue-500 hover:bg-blue-700 text-white btn btn-primary" to={`/admin/categories/update/${item._id}`}>
                                                     <i className="px-1 far fa-edit" />
                                                 </Link>
                                             </td>
@@ -75,7 +74,7 @@ const AdminCategoryManagerPage = () => {
                                                 <button
                                                     onClick={async () => {
                                                         let { data } = await productApi.productByCategory(item._id)
-                                                        if (data.length == 0) {
+                                                        if (data.length === 0) {
                                                             submit(item._id)
                                                         } else {
                                                             toast.warning("Hãy xoá hết sản phẩm thuộc danh mục này trước khi muốn xoá danh mục!")
@@ -97,4 +96,4 @@ const AdminCategoryManagerPage = () => {
     )
 }
 
-export default AdminCategoryManagerPage
+export default CategoryManagerPage

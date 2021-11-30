@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import categoryApi from '../api/categoryApi';
-
+import productApi from '../api/productApi';
 
 //initialState
 const initialState = {
@@ -11,22 +10,22 @@ const initialState = {
 
 
 //actions
-export const Category_create = createAsyncThunk(
-    "Category_create",
-    async (category, thunkApi) => {
+export const Product_create = createAsyncThunk(
+    "Product_create",
+    async (product, thunkApi) => {
         try {
-            const { data } = await categoryApi.add(category);
+            const { data } = await productApi.add(product);
             return data;
         } catch (error) {
             return thunkApi.rejectWithValue(error);
         }
     }
 );
-export const Category_list = createAsyncThunk(
-    "Category_list",
+export const Product_list = createAsyncThunk(
+    "Product_list",
     async (thunkApi) => {
         try {
-            const { data } = await categoryApi.list();
+            const { data } = await productApi.list();
             return data;
         } catch (error) {
             return error;
@@ -34,11 +33,11 @@ export const Category_list = createAsyncThunk(
     }
 );
 
-export const Category_remove = createAsyncThunk(
-    "Category_remove",
-    async (category, thunkApi) => {
+export const Product_remove = createAsyncThunk(
+    "Product_remove",
+    async (product, thunkApi) => {
         try {
-            const { data } = await categoryApi.remove(category);
+            const { data } = await productApi.remove(product);
             return data;
         } catch (error) {
             return thunkApi.rejectWithValue(error);
@@ -46,11 +45,11 @@ export const Category_remove = createAsyncThunk(
     }
 );
 
-export const Category_update = createAsyncThunk(
-    "Category_update",
-    async (category, thunkApi) => {
+export const Product_update = createAsyncThunk(
+    "Product_update",
+    async (product, thunkApi) => {
         try {
-            const { data } = await categoryApi.update(category._id, category);
+            const { data } = await productApi.update(product._id, product);
             return data;
         } catch (error) {
             return thunkApi.rejectWithValue(error);
@@ -59,24 +58,24 @@ export const Category_update = createAsyncThunk(
 );
 
 //create Slice
-const categorySlice = createSlice({
-    name: 'category',
+const ProductSlice = createSlice({
+    name: 'product',
     initialState,
     reducers: {},
     extraReducers: (builder) => {
         //create
-        builder.addCase(Category_create.pending, (state) => {
+        builder.addCase(Product_create.pending, (state) => {
             state.loading = true;
         });
         builder.addCase(
-            Category_create.rejected,
+            Product_create.rejected,
             (state, action) => {
                 state.loading = false;
                 state.error = action.error;
             }
         );
         builder.addCase(
-            Category_create.fulfilled,
+            Product_create.fulfilled,
             (state, action) => {
                 state.loading = false;
                 state.data.push(action.payload);
@@ -84,18 +83,18 @@ const categorySlice = createSlice({
         );
 
         //list
-        builder.addCase(Category_list.pending, (state) => {
+        builder.addCase(Product_list.pending, (state) => {
             state.loading = true;
         });
         builder.addCase(
-            Category_list.rejected,
+            Product_list.rejected,
             (state, action) => {
                 state.loading = false;
                 state.error = action.error;
             }
         );
         builder.addCase(
-            Category_list.fulfilled,
+            Product_list.fulfilled,
             (state, action) => {
                 state.loading = false;
                 state.data = action.payload;
@@ -103,18 +102,18 @@ const categorySlice = createSlice({
         );
 
         //remove
-        builder.addCase(Category_remove.pending, (state) => {
+        builder.addCase(Product_remove.pending, (state) => {
             state.loading = true;
         });
         builder.addCase(
-            Category_remove.rejected,
+            Product_remove.rejected,
             (state, action) => {
                 state.loading = false;
                 state.error = action.error;
             }
         );
         builder.addCase(
-            Category_remove.fulfilled,
+            Product_remove.fulfilled,
             (state, action) => {
                 state.loading = false;
                 let index = state.data.findIndex(
@@ -125,18 +124,18 @@ const categorySlice = createSlice({
         );
 
         //update
-        builder.addCase(Category_update.pending, (state) => {
+        builder.addCase(Product_update.pending, (state) => {
             state.loading = true;
         });
         builder.addCase(
-            Category_update.rejected,
+            Product_update.rejected,
             (state, action) => {
                 state.loading = false;
                 state.error = action.error;
             }
         );
         builder.addCase(
-            Category_update.fulfilled,
+            Product_update.fulfilled,
             (state, action) => {
                 state.loading = false;
                 console.log(action.payload)
@@ -152,4 +151,4 @@ const categorySlice = createSlice({
     }
 })
 
-export default categorySlice.reducer;
+export default ProductSlice.reducer;

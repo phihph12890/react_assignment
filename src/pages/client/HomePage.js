@@ -6,6 +6,7 @@ import Categories from '../../components/client/Categories';
 import ListProduct from '../../components/client/ListProduct';
 
 export default function HomePage() {
+    
     const [products, setProducts] = useState([]);
     useEffect(() => {
         const getProducts = async () => {

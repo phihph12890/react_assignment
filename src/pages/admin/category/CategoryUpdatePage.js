@@ -1,19 +1,37 @@
 import React from 'react';
-import { useDispatch, useSelector } from "react-redux";
-import { ToastContainer, toast } from "react-toastify";
+import { useState, useEffect } from 'react';
+import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from "react-hook-form";
-import { Category_create } from '../../../slice/categorySlice';
-import { useNavigate, Link } from 'react-router-dom';
+import { ToastContainer, toast } from "react-toastify";
+import categoryApi from '../../../api/categoryApi';
+import { Category_update } from '../../../slice/categorySlice';
 
 
-function CategoryAddPage() {
-    const { register, handleSubmit, formState: { errors } } = useForm();
+const CategoryUpdatePage = () => {
+
+    const { register, handleSubmit, formState: { errors }, reset } = useForm();
+    const { id } = useParams();
     const dispatch = useDispatch();
-    const navigate = useNavigate();
+    const navigate = useNavigate()
 
     const categories = useSelector((state) => state.category.data)
+    const [category, setCategory] = useState()
+    useEffect(() => {
+        const getCate = async () => {
+            const { data } = await categoryApi.read(id);
+            setCategory(data);
+            reset({ name: data.name })
+        }
+        getCate();
+    }, [id])
 
-    const onSubmit = (data) => {
+
+    const onSubmit = async (data) => {
+        let newCategory = {
+            ...category,
+            ...data
+        }
         var check = 0;
         categories.forEach(category => {
             if (data.name.trim() === category.name) {
@@ -21,8 +39,8 @@ function CategoryAddPage() {
             }
         })
         if (check === 0) {
-            dispatch(Category_create(data));
-            toast.success("Thêm danh mục thành công!");
+            dispatch(Category_update(newCategory))
+            toast.success("Cập nhật danh mục thành công!");
             setTimeout(() => {
                 navigate("/admin/categories")
             }, 2000)
@@ -30,6 +48,7 @@ function CategoryAddPage() {
             toast.warning("Tên danh mục đã tồn tại!");
         }
     }
+
     return (
         <>
             <ToastContainer />
@@ -39,12 +58,12 @@ function CategoryAddPage() {
                         <h3 className="text-center font-bold pb-4 text-xl">THÊM DANH MỤC</h3>
                         <form className="text-center" onSubmit={handleSubmit(onSubmit)}>
                             <p className="mt-10 font-semibold">Tên Danh mục: </p>
-                            <input type="text" id="category_name" className="border pl-2 mt-2 py-2 text-2xl checkValidate" {...register("name", { required: true })} style={{ width: '400px' }} /> <br />
+                            <input type="text" className="border pl-2 mt-2 py-2 text-2xl checkValidate" {...register("name", { required: true })} style={{ width: '400px' }} /> <br />
                             <div>
                                 {errors.name && <span className="text-red-500 font-bold">Hãy nhập đầy đủ thông tin!</span>}
                             </div>
                             <p className="error text-red-500 text-sm font-semibold" />
-                            <input type="submit" defaultValue="Thêm Danh mục" className="px-4 py-2 text-white bg-red-600 rounded-full mt-4 mb-5 font-semibold hover:bg-red-700" />
+                            <input type="submit" defaultValue="Sửa danh mục" className="px-4 py-2 text-white bg-red-600 rounded-full mt-4 mb-5 font-semibold hover:bg-red-700" />
                         </form>
                     </div>
                     <div>
@@ -58,4 +77,4 @@ function CategoryAddPage() {
     )
 }
 
-export default CategoryAddPage
+export default CategoryUpdatePage

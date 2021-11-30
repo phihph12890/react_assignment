@@ -1,18 +1,11 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
-import categoryApi from '../../api/categoryApi';
+import { useSelector } from "react-redux";
 
 const Categories = () => {
-
-    const [categories, setCategories] = useState([]);
-    useEffect(() => {
-        const getCategories = async () => {
-            const { data } = await categoryApi.list();
-            setCategories(data)
-        }
-        getCategories();
-    }, [])
+    const categories = useSelector((state) => {
+        return state.category.data
+    })
 
     return (
         <aside className="col-span-1 bg-gray-100">
@@ -23,7 +16,7 @@ const Categories = () => {
                 </h2>
                 <ul>
                     <li>
-                        {categories.map(item => {
+                        {categories && categories.map(item => {
                             return (
                                 <Link to={`/categories/${item._id}`} key={item._id} className="block pl-[70px] py-[12px] text-sm font-semibold border-b border-l border-r border-gray-300 hover:bg-blue-300 hover:text-white">{item.name}</Link>
                             )
