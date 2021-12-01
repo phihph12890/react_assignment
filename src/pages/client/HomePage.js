@@ -1,20 +1,30 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import productApi from '../../api/productApi'
 import Banner from '../../components/client/Banner';
 import Categories from '../../components/client/Categories';
 import ListProduct from '../../components/client/ListProduct';
+import { Product_list } from '../../slice/productSlice';
 
 export default function HomePage() {
-    
-    const [products, setProducts] = useState([]);
+
+    const dispatch = useDispatch();
+
+    const productsByStore = useSelector((state) => {
+        return state.product.data.products
+    })
+
+    const [products, setProducts] = useState([])
+
     useEffect(() => {
-        const getProducts = async () => {
-            const { data } = await productApi.list();
-            setProducts(data);
-        }
-        getProducts();
+        // const getProducts = async () => {
+        //     const { data } = await productApi.list()
+        //     setProducts(data)
+        // }
+        // getProducts();
     }, [])
+
 
     const handleSort = (e) => {
         let level = e.target.value;
@@ -36,7 +46,6 @@ export default function HomePage() {
     }
     return (
         <>
-            {/* <Header></Header> */}
             <Banner></Banner>
             <div className="content bg-gray-100 pb-8 pt-8" id="content">
                 <div className=" mx-auto grid grid-cols-4 gap-8" style={{ width: '1200px' }}>

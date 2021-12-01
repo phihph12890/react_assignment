@@ -3,7 +3,10 @@ import productApi from '../api/productApi';
 
 //initialState
 const initialState = {
-    data: [],
+    data: {
+        products: [],
+        productsFilter: []
+    },
     error: null,
     loading: false,
 };
@@ -96,8 +99,9 @@ const ProductSlice = createSlice({
         builder.addCase(
             Product_list.fulfilled,
             (state, action) => {
+                console.log(action)
                 state.loading = false;
-                state.data = action.payload;
+                state.data.products = action.payload;
             }
         );
 
