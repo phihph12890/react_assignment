@@ -33,7 +33,6 @@ export const Category_list = createAsyncThunk(
         }
     }
 );
-
 export const Category_remove = createAsyncThunk(
     "Category_remove",
     async (category, thunkApi) => {
@@ -45,7 +44,6 @@ export const Category_remove = createAsyncThunk(
         }
     }
 );
-
 export const Category_update = createAsyncThunk(
     "Category_update",
     async (category, thunkApi) => {

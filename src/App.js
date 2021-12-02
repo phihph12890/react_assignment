@@ -12,12 +12,17 @@ import CategoryPage from './pages/client/CategoryPage';
 import ProductDetail from './pages/client/ProductDetail';
 import SearchPage from './pages/client/SearchPage';
 
+import Error404Page from './pages/Error404Page';
+import SignInPage from './pages/SignInPage';
+import SignUpPage from './pages/SignUpPage';
+
 import AdminLayout from './components/admin/AdminLayout';
 import CategoryAddPage from './pages/admin/category/CategoryAddPage';
 import CategoryManagerPage from './pages/admin/category/CategoryManagerPage';
 import ProductManagerPage from './pages/admin/ProductManagerPage';
 import CategoryUpdatePage from './pages/admin/category/CategoryUpdatePage';
 import Dashboard from './pages/admin/Dashboard';
+import PrivateRoute from '../src/utils/privateRoute';
 
 import "react-toastify/dist/ReactToastify.css";
 import { Category_list } from './slice/categorySlice';
@@ -54,7 +59,8 @@ export default function App() {
         <div>
           <Routes>
             {/* Layout Website */}
-            <Route path="/" element={<LayoutWebsite />}>
+            <Route path="/" element={<LayoutWebsite />
+            }>
               <Route index element={<HomePage />} />
               <Route path="categories/:id" element={<CategoryPage />} />
               <Route path="products/:id" element={<ProductDetail />} />
@@ -64,7 +70,11 @@ export default function App() {
             </Route>
 
             {/* Layout Admin */}
-            <Route path="admin/*" element={<LayoutAdmin />}>
+            <Route path="admin/*" element={
+              <PrivateRoute>
+                <LayoutAdmin />
+              </PrivateRoute>
+            }>
               <Route index element={<Navigate to="dashboard" />} />
               <Route path="dashboard" element={<Dashboard />} />
               <Route path="products" element={<ProductManagerPage />} />
@@ -72,6 +82,9 @@ export default function App() {
               <Route path="categories/add" element={<CategoryAddPage />} />
               <Route path="categories/update/:id" element={<CategoryUpdatePage />} />
             </Route>
+            <Route path="/signup" element={<SignUpPage />} />
+            <Route path="/signin" element={<SignInPage />} />
+            <Route path="/*" element={<Error404Page />} />
           </Routes>
         </div>
       </BrowserRouter>

@@ -1,28 +1,28 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+// import { useSelector, useDispatch } from 'react-redux';
 import productApi from '../../api/productApi'
 import Banner from '../../components/client/Banner';
 import Categories from '../../components/client/Categories';
 import ListProduct from '../../components/client/ListProduct';
-import { Product_list } from '../../slice/productSlice';
+// import { Product_list } from '../../slice/productSlice';
 
 export default function HomePage() {
 
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
 
-    const productsByStore = useSelector((state) => {
-        return state.product.data.products
-    })
+    // const productsByStore = useSelector((state) => {
+    //     return state.product.data.products
+    // })
 
     const [products, setProducts] = useState([])
 
     useEffect(() => {
-        // const getProducts = async () => {
-        //     const { data } = await productApi.list()
-        //     setProducts(data)
-        // }
-        // getProducts();
+        const getProducts = async () => {
+            const { data } = await productApi.list()
+            setProducts(data)
+        }
+        getProducts();
     }, [])
 
 

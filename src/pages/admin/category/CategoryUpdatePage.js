@@ -55,7 +55,7 @@ const CategoryUpdatePage = () => {
             <div>
                 <div className="content-wrapper pb-[360px]">
                     <div className="container mx-auto pt-5 text-center">
-                        <h3 className="text-center font-bold pb-4 text-xl">THÊM DANH MỤC</h3>
+                        <h3 className="text-center font-bold pb-4 text-xl">CẬP NHẬT DANH MỤC</h3>
                         <form className="text-center" onSubmit={handleSubmit(onSubmit)}>
                             <p className="mt-10 font-semibold">Tên Danh mục: </p>
                             <input type="text" className="border pl-2 mt-2 py-2 text-2xl checkValidate" {...register("name", { required: true })} style={{ width: '400px' }} /> <br />
@@ -63,7 +63,7 @@ const CategoryUpdatePage = () => {
                                 {errors.name && <span className="text-red-500 font-bold">Hãy nhập đầy đủ thông tin!</span>}
                             </div>
                             <p className="error text-red-500 text-sm font-semibold" />
-                            <input type="submit" defaultValue="Sửa danh mục" className="px-4 py-2 text-white bg-red-600 rounded-full mt-4 mb-5 font-semibold hover:bg-red-700" />
+                            <input type="submit" value="Cập nhật" className="px-4 py-2 text-white bg-red-600 rounded-full mt-4 mb-5 font-semibold hover:bg-red-700" />
                         </form>
                     </div>
                     <div>

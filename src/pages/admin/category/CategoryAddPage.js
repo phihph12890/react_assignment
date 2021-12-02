@@ -43,8 +43,8 @@ function CategoryAddPage() {
                             <div>
                                 {errors.name && <span className="text-red-500 font-bold">Hãy nhập đầy đủ thông tin!</span>}
                             </div>
-                            <p className="error text-red-500 text-sm font-semibold" />
-                            <input type="submit" defaultValue="Thêm Danh mục" className="px-4 py-2 text-white bg-red-600 rounded-full mt-4 mb-5 font-semibold hover:bg-red-700" />
+                            
+                            <input type="submit" value="Thêm" className="px-4 py-2 text-white bg-red-600 rounded-full mt-4 mb-5 font-semibold hover:bg-red-700" />
                         </form>
                     </div>
                     <div>
