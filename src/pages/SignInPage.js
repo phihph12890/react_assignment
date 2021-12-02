@@ -3,27 +3,27 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from "react-redux";
 import { ToastContainer } from 'react-toastify';
-import { WarningMessage } from '../utils/util';
+import { WarningMessage, SuccessMessage } from '../utils/util';
 import { SignIn } from '../slice/authSlice';
 
 function SignInPage() {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    
+
     const onSubmit = async (data) => {
-        try {
-            await dispatch(SignIn(data))
-            // const SignInResult = await dispatch(SignIn(data));
-            // const currentUser = unwrapResult(SignInResult);
-            // console.log("currentUser: ", currentUser);
-            // if (SignInResult) {
-            //     localStorage.setItem('user', JSON.stringify(currentUser));
-            // }
-            
-        } catch (error) {
-            console.log(error)
-            WarningMessage(error.response.data.error)
+        const SignInResult = await dispatch(SignIn(data));
+        // const currentUser = unwrapResult(SignInResult);
+        console.log("SignInResult: ", SignInResult);
+
+        if (SignInResult.payload.token) {
+            localStorage.setItem('user', JSON.stringify(SignInResult.payload));
+            SuccessMessage("Đăng nhập thành công!");
+            setTimeout(() => { 
+                navigate("/");
+            }, 1500)
+        } else {
+            WarningMessage(SignInResult.payload.response.data.error)
         }
     }
     return (

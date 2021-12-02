@@ -35,7 +35,6 @@ export const Product_list = createAsyncThunk(
         }
     }
 );
-
 export const Product_remove = createAsyncThunk(
     "Product_remove",
     async (product, thunkApi) => {
@@ -47,7 +46,6 @@ export const Product_remove = createAsyncThunk(
         }
     }
 );
-
 export const Product_update = createAsyncThunk(
     "Product_update",
     async (product, thunkApi) => {

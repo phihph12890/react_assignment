@@ -1,7 +1,14 @@
 import React from 'react';
-import { NavLink, Outlet } from 'react-router-dom';
+import { useNavigate, NavLink, Outlet } from 'react-router-dom';
 
 const AdminLayout = () => {
+    const navigate = useNavigate()
+    const logout = () => {
+        if (localStorage.getItem('user')) {
+            navigate('/signin')
+            return localStorage.removeItem('user');
+        }
+    }
     return (
         <div>
             <header className="navbar navbar-dark sticky-top bg-primary flex-md-nowrap p-0 shadow">
@@ -11,7 +18,7 @@ const AdminLayout = () => {
                 </button>
                 <div className="navbar-nav">
                     <div className="nav-item text-nowrap">
-                        <NavLink className="nav-link px-3" to="">Sign out</NavLink>
+                        <span className="nav-link px-3 cursor-pointer" onClick={logout}>Sign out</span>
                     </div>
                 </div>
             </header>

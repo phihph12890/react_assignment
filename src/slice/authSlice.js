@@ -27,18 +27,10 @@ export const SignUp = createAsyncThunk(
 export const SignIn = createAsyncThunk(
     "SignIn",
     async (userData, thunkApi) => {
-        
         try {
             const { data } = await authApi.signin(userData);
-            localStorage.setItem('user', JSON.stringify(data));
-            SuccessMessage("Đăng nhập thành công!")
-            const navigate = useNavigate();
-            setTimeout(() => {
-                navigate("/")
-            }, 2000)
             return data;
         } catch (error) {
-            WarningMessage(error.response.data.error)
             return thunkApi.rejectWithValue(error);
         }
     }
@@ -57,7 +49,6 @@ const authSlice = createSlice({
         builder.addCase(
             SignUp.rejected,
             (state, action) => {
-
                 state.error = action.error;
                 state.loading = false;
             }
@@ -65,6 +56,7 @@ const authSlice = createSlice({
         builder.addCase(
             SignUp.fulfilled,
             (state, action) => {
+
                 state.data = action.payload;
                 state.loading = false;
             }
