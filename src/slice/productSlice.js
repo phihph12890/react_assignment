@@ -18,6 +18,7 @@ export const Product_create = createAsyncThunk(
     async (product, thunkApi) => {
         try {
             const { data } = await productApi.add(product);
+            console.log(data)
             return data;
         } catch (error) {
             return thunkApi.rejectWithValue(error);
@@ -79,7 +80,7 @@ const ProductSlice = createSlice({
             Product_create.fulfilled,
             (state, action) => {
                 state.loading = false;
-                state.data.push(action.payload);
+                state.data.products.push(action.payload);
             }
         );
 
@@ -118,10 +119,11 @@ const ProductSlice = createSlice({
             Product_remove.fulfilled,
             (state, action) => {
                 state.loading = false;
-                let index = state.data.findIndex(
+                console.log(action);
+                let index = state.data.products.findIndex(
                     (item) => item._id === action.payload.data._id
                 );
-                state.data.splice(index, 1);
+                state.data.products.splice(index, 1);
             }
         );
 

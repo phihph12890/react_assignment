@@ -15,7 +15,7 @@ const CategoryManagerPage = () => {
     const dispatch = useDispatch();
     const categories = useSelector(state => state.category.data);
 
-    const submit = (id) => {
+    const submitRemove = (id) => {
         confirmAlert({
             title: 'XÁC NHẬN?',
             message: 'Bạn có chắc chắn muốn xoá?',
@@ -74,7 +74,7 @@ const CategoryManagerPage = () => {
                                                     onClick={async () => {
                                                         let { data } = await productApi.productByCategory(item._id)
                                                         if (data.length === 0) {
-                                                            submit(item._id)
+                                                            submitRemove(item._id)
                                                         } else {
                                                             WarningMessage("Hãy xoá hết sản phẩm thuộc danh mục này trước khi muốn xoá danh mục!")
                                                         }

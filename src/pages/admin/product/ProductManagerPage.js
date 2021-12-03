@@ -1,12 +1,37 @@
 import React from 'react';
 import { ToastContainer } from "react-toastify";
 import { Link, useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { Product_remove } from '../../../slice/productSlice';
 import { prices, SuccessMessage, WarningMessage } from '../../../utils/util';
+
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
 const ProductManagerPage = () => {
     const products = useSelector(state => state.product.data.products);
     console.log(products)
+    const dispatch = useDispatch();
+    const submitRemove = (id) => {
+        confirmAlert({
+            title: 'XÁC NHẬN?',
+            message: 'Bạn có chắc chắn muốn xoá?',
+            buttons: [
+                {
+                    label: 'Yes',
+                    onClick: () => {
+                        dispatch(Product_remove(id))
+                        SuccessMessage("Xoá thành công!")
+                    }
+                },
+                {
+                    label: 'No',
+                    onClick: () => {
+                    }
+                }
+            ]
+        });
+    };
     return (
         <>
             <ToastContainer />
@@ -52,7 +77,14 @@ const ProductManagerPage = () => {
                                                     <div style={{ width: '30px' }}><Link to={`/admin/products/update/${item._id}`} className="text-sm px-1 border border-gray-600 rounded-lg bg-blue-500 hover:bg-blue-700 text-white btn btn-primary"><i className="px-1 far fa-edit" /></Link></div>
                                                 </td>
                                                 <td className=" text-center border border-black">
-                                                    <div style={{ width: '30px' }}><button className="text-sm px-1 border border-gray-600 rounded-lg bg-red-500 hover:bg-red-700 text-white btn btn-danger btn-remove"><i className="px-1 fas fa-trash-alt" /></button></div>
+                                                    <div style={{ width: '30px' }}>
+                                                        <button className="text-sm px-1 border border-gray-600 rounded-lg bg-red-500 hover:bg-red-700 text-white btn btn-danger btn-remove"
+                                                            onClick={async () => {
+                                                                submitRemove(item._id)
+                                                            }}
+                                                        ><i className="px-1 fas fa-trash-alt" />
+                                                        </button>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         )
