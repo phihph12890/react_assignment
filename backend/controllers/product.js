@@ -72,7 +72,7 @@ export const list = (req, res) => {
 }
 export const productById = (req, res, next, id) => {
     Product.findById(id)
-        .populate('category', '_id name')
+        // .populate('category', '_id name')
         .exec((err, product) => {
             if (err || !product) {
                 res.status(404).json({

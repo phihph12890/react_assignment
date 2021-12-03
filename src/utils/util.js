@@ -29,4 +29,12 @@ export const authenticated = (accessToken) => {
     }
 }
 
+export const arraySort = (arr, index) => {
+    let newArr = [...arr];
+    let element = arr[index];
+    newArr.splice(index, 1);
+    newArr.splice(0, 0, element);
+    return newArr;
+};
+
 

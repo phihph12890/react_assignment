@@ -5,7 +5,8 @@ import productApi from '../api/productApi';
 const initialState = {
     data: {
         products: [],
-        productsFilter: []
+        product: {},
+        productFilter: []
     },
     error: null,
     loading: false,
@@ -58,6 +59,17 @@ export const Product_update = createAsyncThunk(
         }
     }
 );
+export const Product_read = createAsyncThunk(
+    "Product_read",
+    async (id, thunkApi) => {
+        try {
+            const { data } = await productApi.read(id);
+            return data;
+        } catch (error) {
+            return thunkApi.rejectWithValue(error);
+        }
+    }
+);
 
 //create Slice
 const ProductSlice = createSlice({
@@ -98,7 +110,6 @@ const ProductSlice = createSlice({
         builder.addCase(
             Product_list.fulfilled,
             (state, action) => {
-                console.log(action)
                 state.loading = false;
                 state.data.products = action.payload;
             }
@@ -143,13 +154,33 @@ const ProductSlice = createSlice({
             (state, action) => {
                 state.loading = false;
                 console.log(action.payload)
-                const index = state.data.findIndex((item) => {
+                const index = state.data.products.findIndex((item) => {
                     return item._id === action.payload._id;
                 });
-                state.data[index] = {
-                    ...state.data[index],
+                state.data.products[index] = {
+                    ...state.data.products[index],
                     ...action.payload
                 };
+            }
+        );
+
+
+        //read
+        builder.addCase(Product_read.pending, (state) => {
+            state.loading = true;
+        });
+        builder.addCase(
+            Product_read.rejected,
+            (state, action) => {
+                state.loading = false;
+                state.error = action.error;
+            }
+        );
+        builder.addCase(
+            Product_read.fulfilled,
+            (state, action) => {
+                state.loading = false;
+                state.data.product = action.payload;
             }
         );
     }
