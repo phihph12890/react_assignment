@@ -19,8 +19,10 @@ import SignUpPage from './pages/SignUpPage';
 import AdminLayout from './components/admin/AdminLayout';
 import CategoryAddPage from './pages/admin/category/CategoryAddPage';
 import CategoryManagerPage from './pages/admin/category/CategoryManagerPage';
-import ProductManagerPage from './pages/admin/ProductManagerPage';
 import CategoryUpdatePage from './pages/admin/category/CategoryUpdatePage';
+import ProductManagerPage from './pages/admin/product/ProductManagerPage';
+import ProductAddPage from './pages/admin/product/ProductAddPage';
+import ProductUpdatePage from './pages/admin/product/ProductUpdatePage';
 import Dashboard from './pages/admin/Dashboard';
 import PrivateRoute from '../src/utils/privateRoute';
 
@@ -77,7 +79,11 @@ export default function App() {
             }>
               <Route index element={<Navigate to="dashboard" />} />
               <Route path="dashboard" element={<Dashboard />} />
+
               <Route path="products" element={<ProductManagerPage />} />
+              <Route path="products/add" element={<ProductAddPage />} />
+              <Route path="products/update/:id" element={<ProductUpdatePage />} />
+
               <Route path="categories" element={<CategoryManagerPage />} />
               <Route path="categories/add" element={<CategoryAddPage />} />
               <Route path="categories/update/:id" element={<CategoryUpdatePage />} />

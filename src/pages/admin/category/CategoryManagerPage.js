@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from "react-redux";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
+import { WarningMessage, SuccessMessage } from '../../../utils/util';
 import { Link } from 'react-router-dom';
 import { Category_remove } from '../../../slice/categorySlice';
 import { confirmAlert } from 'react-confirm-alert'; // Import
@@ -12,9 +13,7 @@ import productApi from '../../../api/productApi';
 const CategoryManagerPage = () => {
 
     const dispatch = useDispatch();
-    const categories = useSelector((state) => {
-        return state.category.data
-    })
+    const categories = useSelector(state => state.category.data);
 
     const submit = (id) => {
         confirmAlert({
@@ -25,7 +24,7 @@ const CategoryManagerPage = () => {
                     label: 'Yes',
                     onClick: () => {
                         dispatch(Category_remove(id))
-                        toast.success("Xoá thành công!")
+                        SuccessMessage("Xoá thành công!")
                     }
                 },
                 {
@@ -77,7 +76,7 @@ const CategoryManagerPage = () => {
                                                         if (data.length === 0) {
                                                             submit(item._id)
                                                         } else {
-                                                            toast.warning("Hãy xoá hết sản phẩm thuộc danh mục này trước khi muốn xoá danh mục!")
+                                                            WarningMessage("Hãy xoá hết sản phẩm thuộc danh mục này trước khi muốn xoá danh mục!")
                                                         }
                                                     }}
                                                     className="text-sm px-1 rounded-lg bg-red-500 hover:bg-red-700 text-white btn btn-danger btn-remove">

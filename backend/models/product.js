@@ -4,14 +4,14 @@ const { ObjectId } = mongoose.Schema;
 const productSchema = new mongoose.Schema({
     category: {
         type: ObjectId,
-        ref: "Category", 
+        ref: "Category",
         required: true
     },
     name: {
         type: String,
         trim: true,
         required: true,
-        
+
     },
     image: {
         type: String,
@@ -20,12 +20,12 @@ const productSchema = new mongoose.Schema({
     price: {
         type: Number,
         required: true,
-        
+
     },
     priceSale: {
         type: Number,
         required: true,
-        
+
     },
     guarantee: {
         type: String,
@@ -37,8 +37,6 @@ const productSchema = new mongoose.Schema({
     },
     config: {
         type: String,
-        required: true,
-        
     },
     description: {
         type: String,

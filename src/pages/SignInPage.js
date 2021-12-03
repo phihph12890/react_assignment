@@ -19,7 +19,7 @@ function SignInPage() {
         if (SignInResult.payload.token) {
             localStorage.setItem('user', JSON.stringify(SignInResult.payload));
             SuccessMessage("Đăng nhập thành công!");
-            setTimeout(() => { 
+            setTimeout(() => {
                 navigate("/");
             }, 1500)
         } else {
