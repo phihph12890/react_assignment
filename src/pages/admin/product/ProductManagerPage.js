@@ -12,7 +12,7 @@ const ProductManagerPage = () => {
     const products = useSelector(state => state.product.data.products);
     console.log(products)
     const dispatch = useDispatch();
-    const submitRemove = (id) => {
+    const confirmRemove = (id) => {
         confirmAlert({
             title: 'XÁC NHẬN?',
             message: 'Bạn có chắc chắn muốn xoá?',
@@ -80,7 +80,7 @@ const ProductManagerPage = () => {
                                                     <div style={{ width: '30px' }}>
                                                         <button className="text-sm px-1 border border-gray-600 rounded-lg bg-red-500 hover:bg-red-700 text-white btn btn-danger btn-remove"
                                                             onClick={async () => {
-                                                                submitRemove(item._id)
+                                                                confirmRemove(item._id)
                                                             }}
                                                         ><i className="px-1 fas fa-trash-alt" />
                                                         </button>

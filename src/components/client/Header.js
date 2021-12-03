@@ -3,7 +3,7 @@ import { useState } from 'react';
 import Marquee from "react-fast-marquee";
 import { Link, useNavigate } from "react-router-dom";
 import { isAuthenticated, logout } from '../../utils/util';
-import userApi from '../../api/useApi';
+import userApi from '../../api/userApi';
 
 const Header = () => {
     const [searchText, setSearchText] = useState('');

@@ -23,12 +23,14 @@ import CategoryUpdatePage from './pages/admin/category/CategoryUpdatePage';
 import ProductManagerPage from './pages/admin/product/ProductManagerPage';
 import ProductAddPage from './pages/admin/product/ProductAddPage';
 import ProductUpdatePage from './pages/admin/product/ProductUpdatePage';
+import UserManagerPage from './pages/admin/user/UserManagerPage';
 import Dashboard from './pages/admin/Dashboard';
 import PrivateRoute from '../src/utils/privateRoute';
 
 import "react-toastify/dist/ReactToastify.css";
 import { Category_list } from './slice/categorySlice';
 import { Product_list } from './slice/productSlice';
+import { User_list } from './slice/userSlice';
 
 
 export default function App() {
@@ -53,7 +55,7 @@ export default function App() {
   useEffect(() => {
     dispatch(Category_list())
     dispatch(Product_list())
-  })
+  },[])
 
   return (
     <div className="App">
@@ -87,6 +89,8 @@ export default function App() {
               <Route path="categories" element={<CategoryManagerPage />} />
               <Route path="categories/add" element={<CategoryAddPage />} />
               <Route path="categories/update/:id" element={<CategoryUpdatePage />} />
+
+              <Route path="users" element={<UserManagerPage />} />
             </Route>
             <Route path="/signup" element={<SignUpPage />} />
             <Route path="/signin" element={<SignInPage />} />

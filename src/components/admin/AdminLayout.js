@@ -40,6 +40,11 @@ const AdminLayout = () => {
                                 <span style={{ padding: '0 6px 0 2px' }}><i className="fas fa-music" /></span> Quản Trị Sản Phẩm
                             </NavLink>
                         </li>
+                        <li className="nav-item py-2">
+                            <NavLink className="nav-link text-md text-white font-semibold hover:bg-[#1E90FF] rounded-md" to="users">
+                                <span style={{ padding: '0 6px 0 2px' }}><i className="fas fa-user"></i></span> Quản Trị Người Dùng
+                            </NavLink>
+                        </li>
                     </ul>
                 </nav>
                 <div className="col-span-10">

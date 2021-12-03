@@ -1267,6 +1267,11 @@ video {
   padding-right: 2rem;
 }
 
+.py-5 {
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+}
+
 .pt-5 {
   padding-top: 1.25rem;
 }
@@ -1333,6 +1338,18 @@ video {
 
 .pt-3 {
   padding-top: 0.75rem;
+}
+
+.pb-10 {
+  padding-bottom: 2.5rem;
+}
+
+.pb-\[400px\] {
+  padding-bottom: 400px;
+}
+
+.pb-\[500px\] {
+  padding-bottom: 500px;
 }
 
 .text-center {
