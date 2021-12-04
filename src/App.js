@@ -51,7 +51,7 @@ export default function App() {
       }
     }
     window.addEventListener('scroll', handleScroll)
-  })
+  }, [])
 
   useEffect(() => {
     dispatch(Category_list())

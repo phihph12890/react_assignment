@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
+import { ToastContainer } from "react-toastify";
 import Categories from '../../components/client/Categories';
 import ProductItem from '../../components/client/ProductItem';
 import productApi from '../../api/productApi';
-import { prices } from '../../utils/util';
-import { Link } from 'react-router-dom';
+import { addToCart, getTotalItemOnCart, prices, SuccessMessage } from '../../utils/util';
+
 
 const ProductDetail = () => {
 
@@ -32,7 +33,7 @@ const ProductDetail = () => {
     }, [idProduct])
     return (
         <div>
-            {/* <Header></Header> */}
+            <ToastContainer />
             <div className="content bg-gray-100 pb-8 pt-5">
                 <div className=" mx-auto grid grid-cols-4 gap-5" style={{ width: '1200px' }}>
                     <aside className="col-span-1 bg-gray-100">
@@ -56,7 +57,11 @@ const ProductDetail = () => {
                                 <p className="text-sm"><span className="text-base text-green-500"><i className="fas fa-check-square" /></span> Mua hàng trước 15/01/2021 Giảm ngay 1.000.000 vnđ</p>
                                 <div className="mt-8">
                                     <div className="bg-red-500 rounded-lg text-center mt-3" style={{ width: '430px' }}>
-                                        <button>
+                                        <button onClick={() => {
+                                            addToCart(product._id, product.name, product.image, product.priceSale);
+                                            getTotalItemOnCart();
+                                            SuccessMessage("Thêm sản phẩm vào giỏ hàng thành công!")
+                                        }}>
                                             <p className="text-white font-bold text-lg pt-1">Thêm vào giỏ hàng</p>
                                             <p className="text-white font-semibold text-sm mt-1 pb-2">Giao tận nơi hoặc nhận ở cửa hàng</p>
                                         </button>

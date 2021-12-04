@@ -82,8 +82,14 @@ export const getTotalItemOnCart = () => {
     return totalItems;
 }
 
-export const onLoadCartNumber = () => {
-    let cartNumber = localStorage.getItem('cartNumber');
+export function getCurrentDate(separator = '-') {
+    
+    let newDate = new Date()
+    let date = newDate.getDate();
+    let month = newDate.getMonth() + 1;
+    let year = newDate.getFullYear();
+
+    return `${date}${separator}${month < 10 ? `0${month}` : `${month}`}${separator}${year}`
 }
 
 

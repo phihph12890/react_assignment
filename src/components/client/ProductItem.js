@@ -17,7 +17,6 @@ const ProductItem = (props) => {
                         onClick={() => {
                             addToCart(props.product._id, props.product.name, props.product.image, props.product.priceSale);
                             getTotalItemOnCart();
-                            // onLoadCartNumber()
                             SuccessMessage("Thêm sản phẩm vào giỏ hàng thành công!")
                             
                         }}
