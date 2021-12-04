@@ -953,6 +953,14 @@ video {
   width: 4rem;
 }
 
+.w-5 {
+  width: 1.25rem;
+}
+
+.w-\[15px\] {
+  width: 15px;
+}
+
 .translate-y-24 {
   --tw-translate-y: 6rem;
   transform: var(--tw-transform);
@@ -1363,6 +1371,14 @@ video {
 
 .pb-10 {
   padding-bottom: 2.5rem;
+}
+
+.pl-5 {
+  padding-left: 1.25rem;
+}
+
+.pl-6 {
+  padding-left: 1.5rem;
 }
 
 .text-center {

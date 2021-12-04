@@ -1,11 +1,26 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { prices } from '../../utils/util';
 
 
 const CartPage = () => {
-    let productOnCart = JSON.parse(localStorage.getItem('cart'));
-    console.log(productOnCart)
+    let productOnCart = JSON.parse(localStorage.getItem('cart'))
+
+    const [totalMoney, setTotalMoney] = useState()
+    useEffect(() => {
+        const getTotalPrice = () => {
+            let totalPrice = 0
+            productOnCart.forEach(item => {
+                let price
+                price = item.quantity * item.price;
+                console.log(price);
+                totalPrice += price
+            })
+            console.log(totalPrice)
+            setTotalMoney(totalPrice)
+        }
+        getTotalPrice()
+    }, [])
     return (
         <div>
             <div className="div-content bg-gray-100 pb-8">
@@ -25,12 +40,12 @@ const CartPage = () => {
                             <table>
                                 <thead>
                                     <tr className="text-center">
-                                        <th className="border border-gray-300" style={{ width: '50px' }}>STT
-                                        </th><th className="border border-gray-300" style={{ width: '500px' }}>Tên sản phẩm
-                                        </th><th className="border border-gray-300" style={{ width: '150px' }}>Đơn giá
-                                        </th><th className="border border-gray-300" style={{ width: '150px' }}>Số lượng
-                                        </th><th className="border border-gray-300" style={{ width: '150px' }}>Thành tiền
-                                        </th><th className="border border-gray-300" style={{ width: '50px' }}>Xoá
+                                        <th className="border border-gray-300" style={{ width: '100px' }}>STT
+                                        </th><th className="border border-gray-300" style={{ width: '650px' }}>Tên sản phẩm
+                                        </th><th className="border border-gray-300" style={{ width: '200px' }}>Đơn giá
+                                        </th><th className="border border-gray-300" style={{ width: '100px' }}>Số lượng
+                                        </th><th className="border border-gray-300" style={{ width: '200px' }}>Thành tiền
+                                        </th><th className="border border-gray-300" style={{ width: '100px' }}>Xoá
                                         </th></tr>
                                 </thead>
                                 <tbody id="showListCart">
@@ -43,9 +58,13 @@ const CartPage = () => {
                                                 </td>
                                                 <td className="border border-gray-300"><span className="cart_price_show">{prices(Number(item.price)).replace('VND', 'Đ')}</span><span className="cart_price hidden">{Number(item.price)}</span></td>
                                                 <td className="border border-gray-300">
-                                                    <button className="text-sm border border-gray-600 rounded-lg px-2 text-white btn btn-primary btn_minus" data-id="${item.id}">-</button>
-                                                    <input type="number" className="w-16 pl-4 border border-gray-200 rounded-md cart_quantity" disabled />
-                                                    <button className="text-sm border border-gray-600 rounded-lg px-2 text-white btn btn-primary btn_plus" data-id="${item.id}">+</button>
+                                                    {/* <button className="text-sm border border-gray-600 rounded-lg px-2 text-white btn btn-primary btn_minus" data-id="${item.id}">-</button> */}
+                                                    <span>{item.quantity}</span>
+                                                    {/* <button className="text-sm border border-gray-600 rounded-lg px-2 text-white btn btn-primary btn_plus"
+                                                        onClick={() => { 
+
+                                                        }}
+                                                    >+</button> */}
                                                 </td>
                                                 <td className="border border-gray-300"><span className="cart_cost_show">{prices(Number(item.price) * Number(item.quantity)).replace('VND', 'Đ')}</span><span className="cart_cost hidden ">{Number(item.price) * Number(item.quantity)}</span></td>
                                                 <td className="border border-gray-300"><div><button className="text-sm px-1 border border-gray-600 rounded-lg bg-red-500 hover:bg-red-700 text-white btn btn-danger btn-remove" data-id="${item.id}"><i className="px-1 fas fa-trash-alt" /></button></div></td>
@@ -55,13 +74,13 @@ const CartPage = () => {
                                     <tr>
                                         <td colSpan={2} className="border border-gray-400" />
                                         <td colSpan={4} className="border border-gray-400">
-                                            <p className="text-red-500 font-bold my-3 ml-3 text-lg">Tổng tiền: <span id="totalCost" /></p>
+                                            <p className="text-red-500 font-bold my-3 ml-3 text-lg">Tổng tiền: <span id="totalCost" />{prices(Number(totalMoney)).replace('VND', 'Đ')}</p>
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
                             <div className="flex justify-end mt-4 pb-4">
-                                <a href="/#/"><button className="btn btn-primary mr-4">Tiếp tục mua hàng</button></a>
+                                <Link to="/"><button className="btn btn-primary mr-4">Tiếp tục mua hàng</button></Link>
                                 ${'{'}SessionCart(){'}'}
                             </div>
                         </div>
@@ -107,7 +126,7 @@ const CartPage = () => {
                                         <h3 className="text-lg pb-1 font-semibold">2. Ghi chú cho đơn hàng</h3>
                                     </div>
                                     <div className="p-2 border">
-                                        <textarea id="note" rows={3} className="w-full form-control checkValidate"  />
+                                        <textarea id="note" rows={3} className="w-full form-control checkValidate" />
                                     </div>
                                 </div>
                                 <div className="mt-4 ">
