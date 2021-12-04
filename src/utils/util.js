@@ -37,4 +37,53 @@ export const arraySort = (arr, index) => {
     return newArr;
 };
 
+export const addToCart = (id, name, image, price) => {
+    let cartStorage = localStorage.getItem('cart');
+    let screenCart = null;
+    if (cartStorage == null) {
+        screenCart = [];
+    } else {
+        screenCart = JSON.parse(cartStorage);
+        console.log(screenCart);
+    }
+
+    let item = {
+        id: id,
+        name: name,
+        image: image,
+        price: price
+    };
+
+    let existed = screenCart.findIndex(ele => ele.id === item.id);
+    if (existed === -1) {
+        item.quantity = 1;
+        screenCart.push(item);
+    } else {
+        console.log(screenCart);
+        screenCart[existed].quantity++;
+    }
+    console.log(item);
+    localStorage.setItem('cart', JSON.stringify(screenCart));
+}
+
+export const getTotalItemOnCart = () => {
+    let cartStorage = localStorage.getItem('cart');
+    let screenCart = null;
+    if (cartStorage == null) {
+        screenCart = [];
+    } else {
+        screenCart = JSON.parse(cartStorage);
+    }
+    let totalItems = 0
+    screenCart.forEach(element => {
+        totalItems += element.quantity;
+    });
+    localStorage.setItem('cartNumber', totalItems);
+    return totalItems;
+}
+
+export const onLoadCartNumber = () => {
+    let cartNumber = localStorage.getItem('cartNumber');
+}
+
 

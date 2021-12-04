@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import Marquee from "react-fast-marquee";
 import { Link, useNavigate } from "react-router-dom";
 import { isAuthenticated, logout } from '../../utils/util';
@@ -13,11 +13,18 @@ const Header = () => {
         navigate(`/search?name=${searchText}`)
     }
 
+    let cartNumberStorage = localStorage.getItem('cartNumber');
+    const [cartNumber, setCartNumber] = useState();
+    useEffect(() => {
+        setCartNumber(cartNumberStorage)
+    }, [cartNumberStorage])
+
+
     const { user } = isAuthenticated();
 
     const logout = () => {
         if (localStorage.getItem('user')) {
-            
+
             navigate('/signin')
             return localStorage.removeItem('user');
         }
@@ -51,10 +58,10 @@ const Header = () => {
                     <div className="items-center">
                         <div className="flex">
                             <div className="text-center">
-                                <Link to="/shopcart">
+                                <Link to="/cart">
                                     <span className="text-red-600 text-lg cursor-pointer"><i className="fas fa-cart-plus" /></span>
                                     <p id="cart" className="text-sm font-medium cursor-pointer">Giỏ hàng</p>
-                                    <span className="absolute rounded-full px-1.5 bg-red-600 text-sm text-white" id="totalCart" style={{ top: '20px', marginLeft: '3px' }} />
+                                    <span className="absolute rounded-full px-1.5 bg-red-600 text-sm text-white" id="totalCart" style={{ top: '20px', marginLeft: '3px' }}>{cartNumber}</span>
                                 </Link>
                             </div>
                             {

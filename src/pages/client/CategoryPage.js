@@ -1,9 +1,9 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 import productApi from '../../api/productApi';
 import categoryApi from '../../api/categoryApi';
-import { Link } from 'react-router-dom';
 import Categories from '../../components/client/Categories';
 import ListProduct from '../../components/client/ListProduct';
 
@@ -30,7 +30,7 @@ export default function CategoryPage() {
 
     return (
         <>
-            {/* <Header></Header> */}
+            <ToastContainer />
             <div className="content bg-gray-100 pb-8" id="content">
                 <div className=" mx-auto grid grid-cols-4 gap-8 pt-5" style={{ width: '1200px' }}>
                     <aside className="col-span-1 bg-gray-100">

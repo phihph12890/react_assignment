@@ -11,6 +11,7 @@ import ContactPage from './pages/client/ContactPage';
 import CategoryPage from './pages/client/CategoryPage';
 import ProductDetail from './pages/client/ProductDetail';
 import SearchPage from './pages/client/SearchPage';
+import CartPage from './pages/client/CartPage';
 
 import Error404Page from './pages/Error404Page';
 import SignInPage from './pages/SignInPage';
@@ -71,6 +72,7 @@ export default function App() {
               <Route path="search" element={<SearchPage />} />
               <Route path="contact" element={<ContactPage />} />
               <Route path="about" element={<AboutPage />} />
+              <Route path="cart" element={<CartPage />} />
             </Route>
 
             {/* Layout Admin */}

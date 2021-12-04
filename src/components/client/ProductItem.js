@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { prices } from '../../utils/util'
+import { prices, SuccessMessage, addToCart, getTotalItemOnCart, onLoadCartNumber } from '../../utils/util';
+
 
 const ProductItem = (props) => {
     return (
@@ -12,8 +13,15 @@ const ProductItem = (props) => {
                 <NavLink to="/product"><span className="text-center text-sm pt-1 group-hover:text-yellow-600 px-2">{props.product.name}</span></NavLink>
                 <p className="text-red-500 text-lg font-bold py-1">{prices(Number(props.product.priceSale)).replace('VND', 'Đ')}<span className="text-gray-500 text-base ml-2 font-bold pt-1italic line-through">{prices(Number(props.product.price)).replace('VND', 'Đ')}</span></p>
                 <div className="transition duration-300 ease-in-out transform translate-y-24 group-hover:-translate-y-0">
-                    <button className="bg-blue-500 text-white text-base font-bold rounded-md btn_addCart mb-2 hover:bg-blue-700" style={{ padding: '6px 50px' }} data-id="">
-                        THÊM GIỎ HÀNG
+                    <button className="bg-blue-500 text-white text-base font-bold rounded-md btn_addCart mb-2 hover:bg-blue-700" style={{ padding: '6px 50px' }}
+                        onClick={() => {
+                            addToCart(props.product._id, props.product.name, props.product.image, props.product.priceSale);
+                            getTotalItemOnCart();
+                            // onLoadCartNumber()
+                            SuccessMessage("Thêm sản phẩm vào giỏ hàng thành công!")
+                            
+                        }}
+                    >THÊM GIỎ HÀNG
                     </button>
                 </div>
             </div>
