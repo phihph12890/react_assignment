@@ -73,11 +73,13 @@ const CategoryManagerPage = () => {
                                                 <button
                                                     onClick={async () => {
                                                         let { data } = await productApi.productByCategory(item._id)
-                                                        if (data.length === 0) {
-                                                            confirmRemove(item._id)
-                                                        } else {
-                                                            WarningMessage("Hãy xoá hết sản phẩm thuộc danh mục này trước khi muốn xoá danh mục!")
-                                                        }
+                                                        console.log("data: ", data);
+                                                        
+                                                        // if (data.length === 0) {
+                                                        //     confirmRemove(item._id)
+                                                        // } else {
+                                                        //     WarningMessage("Hãy xoá hết sản phẩm thuộc danh mục này trước khi muốn xoá danh mục!")
+                                                        // }
                                                     }}
                                                     className="text-sm px-1 rounded-lg bg-red-500 hover:bg-red-700 text-white btn btn-danger btn-remove">
                                                     <i className="px-1 fas fa-trash-alt" />

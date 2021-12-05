@@ -12,12 +12,12 @@ const Header = () => {
         e.preventDefault();
         navigate(`/search?name=${searchText}`)
     }
-
+    let productOnCart = localStorage.getItem("cart")
     let cartNumberStorage = localStorage.getItem('cartNumber');
     const [cartNumber, setCartNumber] = useState();
     useEffect(() => {
         setCartNumber(cartNumberStorage)
-    }, [cartNumberStorage])
+    }, [productOnCart])
 
 
     const { user } = isAuthenticated();

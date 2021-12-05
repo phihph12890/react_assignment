@@ -1,24 +1,24 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import productApi from '../api/productApi';
+import orderApi from '../api/orderApi';
+
 
 //initialState
 const initialState = {
     data: {
-        products: [],
-        product: {},
-        productFilter: []
+        orders: [],
+        ordersByUser: [],
+        order: {}
     },
     error: null,
     loading: false,
 };
 
-
 //actions
-export const Product_create = createAsyncThunk(
-    "Product_create",
-    async (product, thunkApi) => {
+export const Order_create = createAsyncThunk(
+    "Order_create",
+    async (order, thunkApi) => {
         try {
-            const { data } = await productApi.add(product);
+            const { data } = await orderApi.add(order);
             console.log(data)
             return data;
         } catch (error) {
@@ -26,44 +26,55 @@ export const Product_create = createAsyncThunk(
         }
     }
 );
-export const Product_list = createAsyncThunk(
-    "Product_list",
+export const Order_list = createAsyncThunk(
+    "Order_list",
     async (thunkApi) => {
         try {
-            const { data } = await productApi.list();
-            return data;
-        } catch (error) {
-            return error;
-        }
-    }
-);
-export const Product_remove = createAsyncThunk(
-    "Product_remove",
-    async (product, thunkApi) => {
-        try {
-            const { data } = await productApi.remove(product);
+            const { data } = await orderApi.list();
             return data;
         } catch (error) {
             return thunkApi.rejectWithValue(error);
         }
     }
 );
-export const Product_update = createAsyncThunk(
-    "Product_update",
-    async (product, thunkApi) => {
+export const Order_listByUser = createAsyncThunk(
+    "Order_listByUser",
+    async (user, thunkApi) => {
         try {
-            const { data } = await productApi.update(product._id, product);
+            const { data } = await orderApi.orderByUser(user);
             return data;
         } catch (error) {
             return thunkApi.rejectWithValue(error);
         }
     }
 );
-export const Product_read = createAsyncThunk(
-    "Product_read",
+export const Order_remove = createAsyncThunk(
+    "Order_remove",
     async (id, thunkApi) => {
         try {
-            const { data } = await productApi.read(id);
+            const { data } = await orderApi.remove(id);
+            return data;
+        } catch (error) {
+            return thunkApi.rejectWithValue(error);
+        }
+    }
+);
+export const Order_update = createAsyncThunk(
+    "Order_update",
+    async (order, thunkApi) => {
+        try {
+            const { data } = await orderApi.update(order._id, order);
+            return data;
+        } catch (error) {
+            return thunkApi.rejectWithValue(error);
+        }
+    }
+);
+export const Order_read = createAsyncThunk(
+    "Order_read",
+    async (id, thunkApi) => {
+        try {
+            const { data } = await orderApi.read(id);
             return data;
         } catch (error) {
             return thunkApi.rejectWithValue(error);
@@ -71,94 +82,115 @@ export const Product_read = createAsyncThunk(
     }
 );
 
+
 //create Slice
-const productSlice = createSlice({
+const orderSlice = createSlice({
     name: 'product',
     initialState,
     reducers: {},
     extraReducers: (builder) => {
         //create
-        builder.addCase(Product_create.pending, (state) => {
+        builder.addCase(Order_create.pending, (state) => {
             state.loading = true;
         });
         builder.addCase(
-            Product_create.rejected,
+            Order_create.rejected,
             (state, action) => {
                 state.loading = false;
                 state.error = action.error;
             }
         );
         builder.addCase(
-            Product_create.fulfilled,
+            Order_create.fulfilled,
             (state, action) => {
                 state.loading = false;
-                state.data.products.push(action.payload);
+                state.data.orders.push(action.payload);
             }
         );
 
         //list
-        builder.addCase(Product_list.pending, (state) => {
+        builder.addCase(Order_list.pending, (state) => {
             state.loading = true;
         });
         builder.addCase(
-            Product_list.rejected,
+            Order_list.rejected,
             (state, action) => {
                 state.loading = false;
                 state.error = action.error;
             }
         );
         builder.addCase(
-            Product_list.fulfilled,
+            Order_list.fulfilled,
             (state, action) => {
                 state.loading = false;
-                state.data.products = action.payload;
+                state.data.orders = action.payload;
             }
         );
 
-        //remove
-        builder.addCase(Product_remove.pending, (state) => {
+        //listByUser
+        builder.addCase(Order_listByUser.pending, (state) => {
             state.loading = true;
         });
         builder.addCase(
-            Product_remove.rejected,
+            Order_listByUser.rejected,
             (state, action) => {
                 state.loading = false;
                 state.error = action.error;
             }
         );
         builder.addCase(
-            Product_remove.fulfilled,
+            Order_listByUser.fulfilled,
+            (state, action) => {
+                state.loading = false;
+                state.data.ordersByUser = action.payload;
+            }
+        );
+
+
+        //remove
+        builder.addCase(Order_remove.pending, (state) => {
+            state.loading = true;
+        });
+        builder.addCase(
+            Order_remove.rejected,
+            (state, action) => {
+                state.loading = false;
+                state.error = action.error;
+            }
+        );
+        builder.addCase(
+            Order_remove.fulfilled,
             (state, action) => {
                 state.loading = false;
                 console.log(action);
-                let index = state.data.products.findIndex(
+                let index = state.data.orders.findIndex(
                     (item) => item._id === action.payload.data._id
                 );
-                state.data.products.splice(index, 1);
+                state.data.orders.splice(index, 1);
             }
         );
 
         //update
-        builder.addCase(Product_update.pending, (state) => {
+        builder.addCase(Order_update.pending, (state) => {
             state.loading = true;
         });
         builder.addCase(
-            Product_update.rejected,
+            Order_update.rejected,
             (state, action) => {
                 state.loading = false;
                 state.error = action.error;
             }
         );
         builder.addCase(
-            Product_update.fulfilled,
+            Order_update.fulfilled,
             (state, action) => {
                 state.loading = false;
                 console.log(action.payload)
-                const index = state.data.products.findIndex((item) => {
+                const index = state.data.orders.findIndex((item) => {
                     return item._id === action.payload._id;
                 });
-                state.data.products[index] = {
-                    ...state.data.products[index],
+                state.data.orders[index] = {
+                    ...state.data.orders[index],
                     ...action.payload
                 };
             }
@@ -166,24 +198,24 @@ const productSlice = createSlice({
 
 
         //read
-        builder.addCase(Product_read.pending, (state) => {
+        builder.addCase(Order_read.pending, (state) => {
             state.loading = true;
         });
         builder.addCase(
-            Product_read.rejected,
+            Order_read.rejected,
             (state, action) => {
                 state.loading = false;
                 state.error = action.error;
             }
         );
         builder.addCase(
-            Product_read.fulfilled,
+            Order_read.fulfilled,
             (state, action) => {
                 state.loading = false;
-                state.data.product = action.payload;
+                state.data.order = action.payload;
             }
         );
     }
 })
 
-export default productSlice.reducer;
+export default orderSlice.reducer;

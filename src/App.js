@@ -12,6 +12,8 @@ import CategoryPage from './pages/client/CategoryPage';
 import ProductDetail from './pages/client/ProductDetail';
 import SearchPage from './pages/client/SearchPage';
 import CartPage from './pages/client/CartPage';
+import OrderPage from './pages/client/OrderPage';
+import OrderDetailPage from './pages/client/OrderDetailPage';
 
 import Error404Page from './pages/Error404Page';
 import SignInPage from './pages/SignInPage';
@@ -24,6 +26,8 @@ import CategoryUpdatePage from './pages/admin/category/CategoryUpdatePage';
 import ProductManagerPage from './pages/admin/product/ProductManagerPage';
 import ProductAddPage from './pages/admin/product/ProductAddPage';
 import ProductUpdatePage from './pages/admin/product/ProductUpdatePage';
+import OrderManager from './pages/admin/order/OrderManager';
+import OrderUpdatePage from './pages/admin/order/OrderUpdatePage';
 import UserManagerPage from './pages/admin/user/UserManagerPage';
 import Dashboard from './pages/admin/Dashboard';
 import PrivateRoute from '../src/utils/privateRoute';
@@ -32,6 +36,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { Category_list } from './slice/categorySlice';
 import { Product_list } from './slice/productSlice';
 import { User_list } from './slice/userSlice';
+
+
 
 
 export default function App() {
@@ -56,7 +62,7 @@ export default function App() {
   useEffect(() => {
     dispatch(Category_list())
     dispatch(Product_list())
-  },[])
+  }, [])
 
   return (
     <div className="App">
@@ -73,6 +79,8 @@ export default function App() {
               <Route path="contact" element={<ContactPage />} />
               <Route path="about" element={<AboutPage />} />
               <Route path="cart" element={<CartPage />} />
+              <Route path="order" element={<OrderPage />} />
+              <Route path="order/:id" element={<OrderDetailPage />} />
             </Route>
 
             {/* Layout Admin */}
@@ -92,7 +100,11 @@ export default function App() {
               <Route path="categories/add" element={<CategoryAddPage />} />
               <Route path="categories/update/:id" element={<CategoryUpdatePage />} />
 
+              <Route path="orders" element={<OrderManager />} />
+              <Route path="orders/update/:id" element={<OrderUpdatePage />} />
+
               <Route path="users" element={<UserManagerPage />} />
+
             </Route>
             <Route path="/signup" element={<SignUpPage />} />
             <Route path="/signin" element={<SignInPage />} />

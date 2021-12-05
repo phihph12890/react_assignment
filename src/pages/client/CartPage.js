@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
-import { prices, isAuthenticated, WarningMessage, getCurrentDate } from '../../utils/util';
-
+import { prices, isAuthenticated, WarningMessage, getCurrentDate, SuccessMessage } from '../../utils/util';
+import { Order_create } from '../../slice/orderSlice';
 
 const CartPage = () => {
-
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const { register, handleSubmit, formState: { errors } } = useForm();
     let productOnCart = JSON.parse(localStorage.getItem('cart'))
@@ -57,7 +58,6 @@ const CartPage = () => {
     }
 
     const onSubmit = (data) => {
-        console.log(data)
         const order = {
             user: user._id,
             name: data.name,
@@ -71,7 +71,11 @@ const CartPage = () => {
             create_at: getCurrentDate(),
             status: "CHƯA DUYỆT",
         }
-        console.log(order);
+        dispatch(Order_create(order));
+        SuccessMessage("Đặt hàng thành công!");
+        setTimeout(() => {
+            navigate("/order");
+        }, 1500);
     }
     return (
         <>
@@ -200,17 +204,29 @@ const CartPage = () => {
                                                         <p style={{ minWidth: '120px' }}>Họ tên *</p>
                                                         <input type="text" {...register("name", { required: true })} className="form-control checkValidate" id="fullname" placeholder="Nguyễn Văn A" style={{ width: '420px', height: '30px' }} />
                                                     </div>
+                                                    <div>
+                                                        {errors.name && <span className="text-red-500 font-semibold ml-[120px]">Hãy nhập đầy đủ thông tin!</span>}
+                                                    </div>
                                                     <div className="flex mt-4">
                                                         <p style={{ minWidth: '120px' }}>Địa chỉ*</p>
                                                         <input type="text" {...register("address", { required: true })} className="form-control checkValidate" id="address" placeholder="Số 165 - Cầu Giấy - Quận Cầu Giấy - Hà Nội" style={{ width: '420px', height: '30px' }} />
+                                                    </div>
+                                                    <div>
+                                                        {errors.address && <span className="text-red-500 font-semibold ml-[120px]">Hãy nhập đầy đủ thông tin!</span>}
                                                     </div>
                                                     <div className="flex mt-4">
                                                         <p style={{ minWidth: '120px' }}>Số điện thoại*</p>
                                                         <input type="number" {...register("phoneNumber", { required: true })} className="form-control checkValidate" id="phoneNumber" placeholder="+84 xxx xxx xxx" style={{ width: '420px', height: '30px' }} />
                                                     </div>
+                                                    <div>
+                                                        {errors.phoneNumber && <span className="text-red-500 font-semibold ml-[120px]">Hãy nhập đầy đủ thông tin!</span>}
+                                                    </div>
                                                     <div className="flex mt-4">
                                                         <p style={{ minWidth: '120px' }}>Email</p>
                                                         <input type="email" {...register("email", { required: true })} className="form-control checkValidate" id="email" placeholder="abc@xyz.com" style={{ width: '420px', height: '30px' }} />
+                                                    </div>
+                                                    <div>
+                                                        {errors.email && <span className="text-red-500 font-semibold ml-[120px]">Hãy nhập đầy đủ thông tin!</span>}
                                                     </div>
                                                     <div><p className="errorEmail text-red-500 text-sm font-semibold mt-1" style={{ marginLeft: '120px' }} /></div>
                                                 </div>
@@ -222,7 +238,11 @@ const CartPage = () => {
                                                     </div>
                                                     <div className="p-2 border">
                                                         <textarea {...register("note", { required: true })} id="note" rows={3} className="w-full form-control checkValidate" />
+                                                        <div>
+                                                            {errors.note && <span className="text-red-500 font-semibold">Hãy nhập đầy đủ thông tin!</span>}
+                                                        </div>
                                                     </div>
+
                                                 </div>
                                                 <div className="mt-4 ">
                                                     <div className="border-t border-l border-r pt-1 px-3">

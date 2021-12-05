@@ -82,7 +82,7 @@ const ProductUpdatePage = () => {
             <div>
                 <div className="content-wrapper pb-[360px]">
                     <div className="container mx-auto pt-5">
-                        <h3 className="text-center font-bold pb-4 text-xl">THÊM SẢN PHẨM</h3>
+                        <h3 className="text-center font-bold pb-4 text-xl">CẬP NHẬT SẢN PHẨM</h3>
                         <form onSubmit={handleSubmit(onSubmit)}>
                             <div className="grid grid-cols-2">
                                 <div className="ml-48">

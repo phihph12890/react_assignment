@@ -12,6 +12,7 @@ const ProductManagerPage = () => {
     const products = useSelector(state => state.product.data.products);
     console.log(products)
     const dispatch = useDispatch();
+    
     const confirmRemove = (id) => {
         confirmAlert({
             title: 'XÁC NHẬN?',
