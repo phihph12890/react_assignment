@@ -14,6 +14,7 @@ import SearchPage from './pages/client/SearchPage';
 import CartPage from './pages/client/CartPage';
 import OrderPage from './pages/client/OrderPage';
 import OrderDetailPage from './pages/client/OrderDetailPage';
+import OrderDetailPageAdmin from './pages/admin/order/OrderDetailPageAdmin'
 
 import Error404Page from './pages/Error404Page';
 import SignInPage from './pages/SignInPage';
@@ -101,6 +102,7 @@ export default function App() {
               <Route path="categories/update/:id" element={<CategoryUpdatePage />} />
 
               <Route path="orders" element={<OrderManager />} />
+              <Route path="orders/:id" element={<OrderDetailPageAdmin />} />
               <Route path="orders/update/:id" element={<OrderUpdatePage />} />
 
               <Route path="users" element={<UserManagerPage />} />

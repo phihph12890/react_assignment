@@ -25,13 +25,13 @@ const OrderPage = () => {
     const confirmRemove = (id) => {
         confirmAlert({
             title: 'XÁC NHẬN?',
-            message: 'Bạn có chắc chắn muốn xoá?',
+            message: 'Bạn có chắc chắn muốn huỷ đơn hàng này?',
             buttons: [
                 {
                     label: 'Yes',
                     onClick: () => {
                         dispatch(Order_remove(id))
-                        SuccessMessage("Xoá thành công!")
+                        SuccessMessage("Huỷ đơn hàng thành công")
                         navigate('/order')
                     }
                 },
@@ -49,7 +49,7 @@ const OrderPage = () => {
             <ToastContainer />
             <div className="div-content bg-gray-100 pb-8">
                 <div className="content1 mx-auto" style={{ maxWidth: '1200px' }}>
-                    <div>
+                    <div className="pt-2">
                         <h5 className="py-3 font-semibold">
                             <i className="fas fa-home px-1"></i>
                             <Link to="/">Trang chủ</Link>
@@ -110,7 +110,11 @@ const OrderPage = () => {
                                                                 <div>
                                                                     <button className="text-sm px-2 border border-gray-600 rounded-lg text-white btn btn-danger btn-remove"
                                                                         onClick={() => {
-                                                                            confirmRemove(item._id);
+                                                                            if (item.status === "ĐÃ HOÀN THÀNH" || item.status === "ĐÃ DUYỆT") {
+                                                                                WarningMessage("Không thể huỷ đơn hàng ĐÃ DUYỆT hoặc ĐÃ HOÀN THÀNH!")
+                                                                            } else {
+                                                                                confirmRemove(item._id);
+                                                                            }
                                                                         }}
                                                                     ><i className="fas fa-trash-alt"></i>
                                                                     </button>

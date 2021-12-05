@@ -74,6 +74,9 @@ const CartPage = () => {
         dispatch(Order_create(order));
         SuccessMessage("Đặt hàng thành công!");
         setTimeout(() => {
+            localStorage.removeItem('cart');
+            localStorage.removeItem('cartNumber');
+            localStorage.removeItem('totalPrice');
             navigate("/order");
         }, 1500);
     }
@@ -131,7 +134,7 @@ const CartPage = () => {
                                                                     }}
                                                                 >+</button> */}
                                                             </td>
-                                                            <td className="border border-gray-300"><span className="cart_cost_show">{prices(Number(item.price) * Number(item.quantity)).replace('VND', 'Đ')}</span><span className="cart_cost hidden ">{Number(item.price) * Number(item.quantity)}</span></td>
+                                                            <td className="border border-gray-300"><span className="cart_cost_show font-semibold">{prices(Number(item.price) * Number(item.quantity)).replace('VND', 'Đ')}</span><span className="cart_cost hidden ">{Number(item.price) * Number(item.quantity)}</span></td>
                                                             <td className="border border-gray-300">
                                                                 <div>
                                                                     <button className="text-sm px-1 border border-gray-600 rounded-lg bg-red-500 hover:bg-red-700 text-white btn btn-danger btn-remove"
@@ -165,7 +168,7 @@ const CartPage = () => {
                                                 <tr>
                                                     <td colSpan={2} className="border border-gray-400" />
                                                     <td colSpan={4} className="border border-gray-400">
-                                                        <p className="text-red-500 font-bold my-3 ml-3 text-lg">Tổng tiền: <span id="totalCost" />{prices(Number(totalMoney)).replace('VND', 'Đ')}</p>
+                                                        <p className="text-red-500 font-bold my-3 ml-3 text-lg text-right pr-[100px] uppercase">Tổng tiền: <span id="totalCost" />{prices(Number(totalMoney)).replace('VND', 'Đ')}</p>
                                                     </td>
                                                 </tr>
                                             </tbody>

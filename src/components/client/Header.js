@@ -24,10 +24,12 @@ const Header = () => {
 
     const logout = () => {
         if (localStorage.getItem('user')) {
-
             navigate('/signin')
-            return localStorage.removeItem('user');
+            localStorage.removeItem('user');
         }
+        localStorage.removeItem('cart');
+        localStorage.removeItem('cartNumber');
+        localStorage.removeItem('totalPrice');
     }
     return (
         <div>

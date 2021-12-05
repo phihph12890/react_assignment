@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import orderApi from '../../api/orderApi';
 
 const AboutPage = () => {
     return (
@@ -63,7 +64,6 @@ const AboutPage = () => {
                     <div className="content3" />
                 </div>
             </div>
-            {/* <Footer></Footer> */}
         </div>
     )
 }
