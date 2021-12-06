@@ -3,7 +3,10 @@ import userApi from '../api/userApi';
 
 //initialState
 const initialState = {
-    data: [],
+    data: {
+        users: [],
+        user: {}
+    },
     error: null,
     loading: false,
 };
@@ -26,6 +29,28 @@ export const User_remove = createAsyncThunk(
     async (user, thunkApi) => {
         try {
             const { data } = await userApi.remove(user);
+            return data;
+        } catch (error) {
+            return thunkApi.rejectWithValue(error);
+        }
+    }
+);
+export const User_read = createAsyncThunk(
+    "User_read",
+    async (id, thunkApi) => {
+        try {
+            const { data } = await userApi.read(id);
+            return data;
+        } catch (error) {
+            return thunkApi.rejectWithValue(error);
+        }
+    }
+);
+export const User_update = createAsyncThunk(
+    "User_update",
+    async (user, thunkApi) => {
+        try {
+            const { data } = await userApi.update(user._id, user);
             return data;
         } catch (error) {
             return thunkApi.rejectWithValue(error);
@@ -55,9 +80,30 @@ const userSlice = createSlice({
             User_list.fulfilled,
             (state, action) => {
                 state.loading = false;
-                state.data = action.payload;
+                state.data.users = action.payload;
             }
         );
+
+
+        //read
+        builder.addCase(User_read.pending, (state) => {
+            state.loading = true;
+        });
+        builder.addCase(
+            User_read.rejected,
+            (state, action) => {
+                state.loading = false;
+                state.error = action.error;
+            }
+        );
+        builder.addCase(
+            User_read.fulfilled,
+            (state, action) => {
+                state.loading = false;
+                state.data.user = action.payload;
+            }
+        );
+
 
         //remove
         builder.addCase(User_remove.pending, (state) => {
@@ -74,10 +120,37 @@ const userSlice = createSlice({
             User_remove.fulfilled,
             (state, action) => {
                 state.loading = false;
-                let index = state.data.findIndex(
+                let index = state.data.users.findIndex(
                     (item) => item._id === action.payload.data._id
                 );
-                state.data.splice(index, 1);
+                state.data.users.splice(index, 1);
+            }
+        );
+
+
+        //update
+        builder.addCase(User_update.pending, (state) => {
+            state.loading = true;
+        });
+        builder.addCase(
+            User_update.rejected,
+            (state, action) => {
+                state.loading = false;
+                state.error = action.error;
+            }
+        );
+        builder.addCase(
+            User_update.fulfilled,
+            (state, action) => {
+                state.loading = false;
+                console.log(action.payload)
+                const index = state.data.users.findIndex((item) => {
+                    return item._id === action.payload._id;
+                });
+                state.data.users[index] = {
+                    ...state.data.users[index],
+                    ...action.payload
+                };
             }
         );
     }

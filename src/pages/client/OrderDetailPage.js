@@ -25,7 +25,7 @@ const OrderDetailPage = () => {
                             <Link to="/">Đơn hàng</Link>
 
                             <i className="fas fa-angle-double-right text-xs px-1" />
-                            <i class="fas fa-info-circle px-1"></i>
+                            <i className="fas fa-info-circle px-1"></i>
                             Chi tiết
                         </h5>
                     </div>
@@ -44,8 +44,8 @@ const OrderDetailPage = () => {
                                     <p className="mt-3"><span className="font-semibold">Trạng thái:</span> <span>{order && order.status}
                                         {
                                             (order.status === "CHƯA DUYỆT")
-                                                ? (<span className="text-red-500 px-1"><i class="fas fa-times"></i></span>)
-                                                : (<span className="text-green-500 px-1"><i class="fas fa-check"></i></span>)
+                                                ? (<span className="text-red-500 px-1"><i className="fas fa-times"></i></span>)
+                                                : (<span className="text-green-500 px-1"><i className="fas fa-check"></i></span>)
                                         }
                                     </span>
                                     </p>

@@ -12,7 +12,7 @@ const AdminLayout = () => {
     return (
         <div>
             <header className="navbar navbar-dark sticky-top bg-primary flex-md-nowrap p-0 shadow">
-                <NavLink className="navbar-brand col-md-3 col-lg-2 me-0 px-3 py-3 ml-24 text-white" to="/admin">ADMIN</NavLink>
+                <NavLink className="navbar-brand col-md-3 col-lg-2 me-0 px-3 py-3 ml-24 text-white" to="/">BACK TO WEBSITE</NavLink>
                 <button className="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon" />
                 </button>

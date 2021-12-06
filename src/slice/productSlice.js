@@ -5,7 +5,7 @@ import productApi from '../api/productApi';
 const initialState = {
     data: {
         products: [],
-        product: {},
+        product: [],
         productFilter: []
     },
     error: null,
@@ -163,7 +163,6 @@ const productSlice = createSlice({
                 };
             }
         );
-
 
         //read
         builder.addCase(Product_read.pending, (state) => {

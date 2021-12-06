@@ -59,6 +59,17 @@ export const Order_remove = createAsyncThunk(
         }
     }
 );
+export const OrderByUser_remove = createAsyncThunk(
+    "OrderByUser_remove",
+    async (id, thunkApi) => {
+        try {
+            const { data } = await orderApi.remove(id);
+            return data;
+        } catch (error) {
+            return thunkApi.rejectWithValue(error);
+        }
+    }
+);
 export const Order_update = createAsyncThunk(
     "Order_update",
     async (order, thunkApi) => {
@@ -167,6 +178,29 @@ const orderSlice = createSlice({
                     (item) => item._id === action.payload.data._id
                 );
                 state.data.orders.splice(index, 1);
+            }
+        );
+
+        //remove by User
+        builder.addCase(OrderByUser_remove.pending, (state) => {
+            state.loading = true;
+        });
+        builder.addCase(
+            OrderByUser_remove.rejected,
+            (state, action) => {
+                state.loading = false;
+                state.error = action.error;
+            }
+        );
+        builder.addCase(
+            OrderByUser_remove.fulfilled,
+            (state, action) => {
+                state.loading = false;
+                console.log(action);
+                let index = state.data.ordersByUser.findIndex(
+                    (item) => item._id === action.payload.data._id
+                );
+                state.data.ordersByUser.splice(index, 1);
             }
         );
 

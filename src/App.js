@@ -30,6 +30,7 @@ import ProductUpdatePage from './pages/admin/product/ProductUpdatePage';
 import OrderManager from './pages/admin/order/OrderManager';
 import OrderUpdatePage from './pages/admin/order/OrderUpdatePage';
 import UserManagerPage from './pages/admin/user/UserManagerPage';
+import UserUpdatePage from './pages/admin/user/UserUpdatePage';
 import Dashboard from './pages/admin/Dashboard';
 import PrivateRoute from '../src/utils/privateRoute';
 
@@ -106,6 +107,7 @@ export default function App() {
               <Route path="orders/update/:id" element={<OrderUpdatePage />} />
 
               <Route path="users" element={<UserManagerPage />} />
+              <Route path="users/update/:id" element={<UserUpdatePage />} />
 
             </Route>
             <Route path="/signup" element={<SignUpPage />} />

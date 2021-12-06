@@ -3,10 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer } from "react-toastify";
 import { isAuthenticated, prices, SuccessMessage, WarningMessage } from '../../utils/util';
-import { Order_listByUser, Order_remove } from '../../slice/orderSlice';
+import { Order_listByUser, OrderByUser_remove } from '../../slice/orderSlice';
 
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
+import productApi from '../../api/productApi';
+import { Product_update } from '../../slice/productSlice';
 
 const OrderPage = () => {
     const navigate = useNavigate()
@@ -22,7 +24,7 @@ const OrderPage = () => {
     }, [])
     console.log("ordersByUser: ", orders);
 
-    const confirmRemove = (id) => {
+    const confirmRemove = (item) => {
         confirmAlert({
             title: 'XÁC NHẬN?',
             message: 'Bạn có chắc chắn muốn huỷ đơn hàng này?',
@@ -30,9 +32,16 @@ const OrderPage = () => {
                 {
                     label: 'Yes',
                     onClick: () => {
-                        dispatch(Order_remove(id))
-                        SuccessMessage("Huỷ đơn hàng thành công")
+                        item.cart.forEach(async (ele) => {
+                            const { data } = await productApi.read(ele.id);
+                            data.quantity += ele.quantity;
+                            console.log(data)
+                            dispatch(Product_update(data))
+                        })
+                        dispatch(OrderByUser_remove(item._id))
                         navigate('/order')
+                        SuccessMessage("Huỷ đơn hàng thành công")
+                        
                     }
                 },
                 {
@@ -113,7 +122,7 @@ const OrderPage = () => {
                                                                             if (item.status === "ĐÃ HOÀN THÀNH" || item.status === "ĐÃ DUYỆT") {
                                                                                 WarningMessage("Không thể huỷ đơn hàng ĐÃ DUYỆT hoặc ĐÃ HOÀN THÀNH!")
                                                                             } else {
-                                                                                confirmRemove(item._id);
+                                                                                confirmRemove(item);
                                                                             }
                                                                         }}
                                                                     ><i className="fas fa-trash-alt"></i>

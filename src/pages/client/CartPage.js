@@ -5,6 +5,8 @@ import { useDispatch } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 import { prices, isAuthenticated, WarningMessage, getCurrentDate, SuccessMessage } from '../../utils/util';
 import { Order_create } from '../../slice/orderSlice';
+import { Product_update, Product_read } from '../../slice/productSlice';
+import productApi from '../../api/productApi';
 
 const CartPage = () => {
     const dispatch = useDispatch();
@@ -23,7 +25,6 @@ const CartPage = () => {
                     price = item.quantity * item.price;
                     totalPrice += price
                 })
-                console.log(totalPrice)
                 localStorage.setItem('totalPrice', JSON.stringify(totalPrice))
             }
 
@@ -71,7 +72,15 @@ const CartPage = () => {
             create_at: getCurrentDate(),
             status: "CHƯA DUYỆT",
         }
+        
         dispatch(Order_create(order));
+        productOnCart.forEach(async (item) => {
+            console.log(item.id, item.quantity)
+            const { data } = await productApi.read(item.id)
+            data.quantity -= item.quantity;
+            console.log(data)
+            dispatch(Product_update(data));
+        })
         SuccessMessage("Đặt hàng thành công!");
         setTimeout(() => {
             localStorage.removeItem('cart');
@@ -245,7 +254,6 @@ const CartPage = () => {
                                                             {errors.note && <span className="text-red-500 font-semibold">Hãy nhập đầy đủ thông tin!</span>}
                                                         </div>
                                                     </div>
-
                                                 </div>
                                                 <div className="mt-4 ">
                                                     <div className="border-t border-l border-r pt-1 px-3">
