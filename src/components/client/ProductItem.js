@@ -42,6 +42,7 @@ const ProductItem = (props) => {
                             // data.quantity -= 1;
                             // console.log(data);
                             addToCart(props.product._id, props.product.name, props.product.image, props.product.priceSale);
+                            
                             getTotalItemOnCart();
                             SuccessMessage("Thêm sản phẩm vào giỏ hàng thành công!")
                         } else {
